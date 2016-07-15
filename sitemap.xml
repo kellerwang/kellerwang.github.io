@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/07/15/%E4%BD%BF%E7%94%A8Hexo%E6%9E%84%E5%BB%BABlog/</loc>
+    
+    <lastmod>2016-07-15T08:35:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/07/15/hello-world/</loc>
     
     <lastmod>2016-07-15T08:29:02.000Z</lastmod>
