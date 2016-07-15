@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>KylerのBlog</title>
-  
+  <subtitle>程序员 &amp; 旅行爱好者 &amp; 业余厨师</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-15T08:35:52.000Z</updated>
+  <updated>2016-07-15T10:33:41.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,50 @@
     <link href="http://yoursite.com/2016/07/15/%E4%BD%BF%E7%94%A8Hexo%E6%9E%84%E5%BB%BABlog/"/>
     <id>http://yoursite.com/2016/07/15/使用Hexo构建Blog/</id>
     <published>2016-07-15T08:35:52.000Z</published>
-    <updated>2016-07-15T08:35:52.000Z</updated>
+    <updated>2016-07-15T10:33:41.000Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，于是借着这波东风赶鸭子上架，花了2h时间研究了下github快速搭建博客的方法。这里写下使用Hexo搭建Blog的主要流程作为我第一篇文章，需要的拿走不谢。&lt;/p&gt;
+&lt;p&gt;另外本文参考了Google上search的一些同类型文章，首先我觉得大家写的都很赞，对这些前辈就不一一感谢了。但是多数文章Hexo和github结合的一些细节表达的还不是特别清楚，导致我读的时候也有些困惑，所以不才大胆对这些资料进行总结精炼，并且对Hexo部署到github page的细节更多说明。&lt;/p&gt;
+&lt;p&gt;另外转载请尽量给个面子，标注个作者啥的。实在不愿意心里默默感谢下也算了。╮(╯▽╰)╭&lt;/p&gt;
+&lt;h2 id=&quot;为什么要使用Hexo-amp-Github搭建Blog？&quot;&gt;&lt;a href=&quot;#为什么要使用Hexo-amp-Github搭建Blog？&quot; class=&quot;headerlink&quot; title=&quot;为什么要使用Hexo&amp;amp;Github搭建Blog？&quot;&gt;&lt;/a&gt;为什么要使用Hexo&amp;amp;Github搭建Blog？&lt;/h2&gt;&lt;p&gt;这个问题有几个层面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一为什么要搭建自己的Blog？我觉得对于Coder来说使用markdown、git这些语言或工具写文章可以提高效率，目前像博客园或CSDN应该还不能支持。&lt;/li&gt;
+&lt;li&gt;第二为啥要用github pages？恩，对应土豪来说自己买服务器也是可以的。对于多数轻量级用户（文章写得少，访问量少）github pages不收费(300MB)方便部署很经济。&lt;/li&gt;
+&lt;li&gt;第三为毛要用Hexo？恩（思考ing），同事推荐我马上就用了，另外其他人说相比Jekyll、Octopress来说Hexo更轻便更快捷。。。好吧，其他两个不太熟悉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;主要步骤&quot;&gt;&lt;a href=&quot;#主要步骤&quot; class=&quot;headerlink&quot; title=&quot;主要步骤&quot;&gt;&lt;/a&gt;主要步骤&lt;/h2&gt;&lt;h3 id=&quot;github创建仓库&quot;&gt;&lt;a href=&quot;#github创建仓库&quot; class=&quot;headerlink&quot; title=&quot;github创建仓库&quot;&gt;&lt;/a&gt;github创建仓库&lt;/h3&gt;&lt;p&gt;不了解github和不知道如何创建仓库（repository）的请参考&lt;a href=&quot;https://guides.github.com/activities/hello-world/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://guides.github.com/activities/hello-world/&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/55032611.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;据传说repository name必须是github的username.github.io，我就是照着做的，大家可以试试不这样（期待脸）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/26390887.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;创建好仓库后再setting tag中点击Launch automatic page generator，如上图。这时你访问username.github.io就可以看到github pages自动生成的静态页面网站。是不是很有成就感？然而对于使用Hexo的同学来说这步并没有什么卵用。&lt;/p&gt;
+&lt;h3 id=&quot;安装Node-JS&quot;&gt;&lt;a href=&quot;#安装Node-JS&quot; class=&quot;headerlink&quot; title=&quot;安装Node.JS&quot;&gt;&lt;/a&gt;安装Node.JS&lt;/h3&gt;&lt;p&gt;这一步是按照Hexo的前期准备，其实前面貌似还有一步安装git，恩。。。。。。好吧，我们忽略没有安装git的同学。&lt;/p&gt;
+&lt;p&gt;安转nodejs直接到&lt;a href=&quot;https://nodejs.org/en/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nodejs官网&lt;/a&gt;直接下载安装包点击安装。需要注意是国内建议更换taobao的npm源，如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ npm install -g cnpm --registry=https://registry.npm.taobao.org&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;安装Hexo&quot;&gt;&lt;a href=&quot;#安装Hexo&quot; class=&quot;headerlink&quot; title=&quot;安装Hexo&quot;&gt;&lt;/a&gt;安装Hexo&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ npm install -g hexo&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;仅仅一条命令就是这么简单，这么屌。&lt;/p&gt;
+&lt;p&gt;然后你可能需要安转一些插件，比较重要的是git自动部署插件。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-deployer-git --save&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;我是参考网上的教程，也装了些其他的，下面列出来，需不需要大家自己研究咯。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-generator-index --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-generator-archive --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-generator-category --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-generator-tag --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-server --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-deployer-heroku --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-deployer-rsync --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-deployer-openshift --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-renderer-marked@0.2 --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-renderer-stylus@0.2 --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-generator-feed@1 --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install hexo-generator-sitemap@1 --save&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Hexo初始化&quot;&gt;&lt;a href=&quot;#Hexo初始化&quot; class=&quot;headerlink&quot; title=&quot;Hexo初始化&quot;&gt;&lt;/a&gt;Hexo初始化&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo init &amp;lt;folder&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ cd &amp;lt;folder&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$ npm install&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;所有相关文件会出现在你指定的folder中。&lt;/p&gt;
+&lt;h3 id=&quot;本地查看效果&quot;&gt;&lt;a href=&quot;#本地查看效果&quot; class=&quot;headerlink&quot; title=&quot;本地查看效果&quot;&gt;&lt;/a&gt;本地查看效果&lt;/h3&gt;&lt;p&gt;这步其实也没用，执行下面命令，可以到&lt;code&gt;localhost：4000&lt;/code&gt;查看效果。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo server&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;创建文章&quot;&gt;&lt;a href=&quot;#创建文章&quot; class=&quot;headerlink&quot; title=&quot;创建文章&quot;&gt;&lt;/a&gt;创建文章&lt;/h3&gt;&lt;p&gt;hexo写作其实主要就如下四个命令，每次创建或修改文章都需要至少执行&lt;code&gt;hexo g&lt;/code&gt;和&lt;code&gt;hexo d&lt;/code&gt;两条命令。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo n “文章名” # 创建文章&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo clean # 恩，其实并不太知道有没有用。。。&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo g # 生成public静态文件&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo d # 发布项目到github pages&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;部署到github-pages&quot;&gt;&lt;a href=&quot;#部署到github-pages&quot; class=&quot;headerlink&quot; title=&quot;部署到github pages&quot;&gt;&lt;/a&gt;部署到github pages&lt;/h3&gt;&lt;p&gt;Hexo的发布其实是依赖git的，所以需要修改根目录下&lt;code&gt;_config.yml&lt;/code&gt;文件的&lt;code&gt;Deployment&lt;/code&gt;部分。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# Deployment&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;## Docs: https://hexo.io/docs/deployment.html&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;deploy:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	type: git&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	repo: git@github.com:kellerwang/kellerwang.github.io.git&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	branch: master&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;需要特别注意&lt;code&gt;type:&lt;/code&gt;、&lt;code&gt;repo:&lt;/code&gt;和&lt;code&gt;branch:&lt;/code&gt;后面需要空格，否则配置不成功。&lt;/p&gt;
+&lt;p&gt;配置完成后执行&lt;code&gt;hexo d&lt;/code&gt;，然后稍等片刻去愉快地访问你的username.github.io吧。&lt;/p&gt;
+</content>
     
     <summary type="html">
     
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，
+    
     </summary>
+    
+      <category term="技术" scheme="http://yoursite.com/categories/program/"/>
     
     
   </entry>
