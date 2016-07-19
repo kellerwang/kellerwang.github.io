@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-19T11:45:21.000Z</updated>
+  <updated>2016-07-19T11:49:43.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,619 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java编程最佳实践</title>
+    <link href="http://yoursite.com/2016/07/19/Java%E7%BC%96%E7%A8%8B%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://yoursite.com/2016/07/19/Java编程最佳实践/</id>
+    <published>2016-07-19T11:47:58.000Z</published>
+    <updated>2016-07-19T11:49:43.000Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;转自喜马拉雅军校第一期班&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;本文示例为了突出重点，没有写参数检验等代码，在实际项目中不要忽略。&lt;/li&gt;
+&lt;li&gt;本文重点列举Java语言和标准库上的通用优化建议，遵循这些建议可以在不改变系统框架和设计的情况下减少错误，提高效率。系统级优化需要对性能做全面的监测和分析，没有通用方法，本文涉及不多，建议阅读专业的Java性能优化相关资料。&lt;/li&gt;
+&lt;li&gt;代码首先要符合规范，保证可读性，在此基础上再优化。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;基本类型&quot;&gt;&lt;a href=&quot;#基本类型&quot; class=&quot;headerlink&quot; title=&quot;基本类型&quot;&gt;&lt;/a&gt;基本类型&lt;/h2&gt;&lt;h4 id=&quot;多用基本类型，少用封装类型&quot;&gt;&lt;a href=&quot;#多用基本类型，少用封装类型&quot; class=&quot;headerlink&quot; title=&quot;多用基本类型，少用封装类型&quot;&gt;&lt;/a&gt;多用基本类型，少用封装类型&lt;/h4&gt;&lt;p&gt;只在需要使用对象时使用封装类型（如表示null，用于泛型）。&lt;/p&gt;
+&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 封装类型比基本类型占用更多的内存空间
+2. 封装类型使用时需要判断是否为null
+3. 拆装箱有性能损失
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 当getInteger为null时randomNumber可能会抛异常
+Integer getInteger(){...}
+Integer randomNumber() {
+    return random.nextBoolean() ? 1 : getInteger(); 
+}
+
+// 不断创建Integer，效率低
+Integer sum = 0;
+for (int i = 0; i &amp;lt; Integer.MAX_VALUE; i++) {
+    sum += i;
+}
+
+// 封装类型比较时的异常行为 
+Integer i1 = 1234;
+Integer i2 = 1234;
+// false 数值比较，i1.intValue()不小于i2.intValue()
+System.out.println(i1 &amp;lt; i2);
+// false 引用一致性比较，i1和i2是不同对象
+System.out.println(i1 == i2);
+// false 数值比较，i1.intValue()不大于i2.intValue()
+System.out.println(i1 &amp;gt; i2);
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;手动装箱时使用valueOf-type-，不用new&quot;&gt;&lt;a href=&quot;#手动装箱时使用valueOf-type-，不用new&quot; class=&quot;headerlink&quot; title=&quot;手动装箱时使用valueOf([type])，不用new&quot;&gt;&lt;/a&gt;手动装箱时使用valueOf([type])，不用new&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Java标准库对整数类型的部分对象做了缓存，使用valueOf可以利用这些缓存减少内存使用量。
+例如Integer默认对-128到127之间的对象做了缓存（可以通过jvm参数提高上限）。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// bad
+Integer integer2 = new Integer(123);
+
+// good，但代码中没必要这样写，编译器会自动装箱
+Integer integer1 = Integer.valueOf(123);
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用parseType-，不用valueOf-String&quot;&gt;&lt;a href=&quot;#使用parseType-，不用valueOf-String&quot; class=&quot;headerlink&quot; title=&quot;使用parseType\，不用valueOf(String)&quot;&gt;&lt;/a&gt;使用parse&lt;a href=&quot;String&quot;&gt;Type\&lt;/a&gt;，不用valueOf(String)&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parse[Type](String)返回的是基本类型，valueOf(String)返回的是封装类型，所以需要基本类型时使用parse\[Type\]性能比较好；
+在需要封装类型时，使用valueOf也不会带来性能提升，因为java编译器会做自动装箱，valueOf只是将自动装箱显式化。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// bad
+int i2 = Integer.valueOf(&amp;quot;123&amp;quot;);
+
+// good
+int i1 = Integer.parseInt(&amp;quot;123&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;不用-比较浮点数&quot;&gt;&lt;a href=&quot;#不用-比较浮点数&quot; class=&quot;headerlink&quot; title=&quot;不用==比较浮点数&quot;&gt;&lt;/a&gt;不用==比较浮点数&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;float和double在计算机中不是精确存储的，直接用==比较会出现与预期结果不一样的情况。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;double d1 = 0.01D;
+double d2 = 0.01F;
+// false
+System.out.println(d1 == d2);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实践：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//使用BigDecimal精确表示浮点数 或 设置误差范围
+boolean equals(double d1, double d2) {
+    return Math.abs(d1 - d2) &amp;lt; 0.0001;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用BigDecimal时注意小数位数&quot;&gt;&lt;a href=&quot;#使用BigDecimal时注意小数位数&quot; class=&quot;headerlink&quot; title=&quot;使用BigDecimal时注意小数位数&quot;&gt;&lt;/a&gt;使用BigDecimal时注意小数位数&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;小数位是BigDecimal的组成部分，小数位会影响BigDecimal比较结果。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;BigDecimal decimal1 = new BigDecimal(&amp;quot;0.01&amp;quot;);
+BigDecimal decimal2 = new BigDecimal(&amp;quot;0.010&amp;quot;);
+// false
+System.out.println(decimal1.equals(decimal2));
+// true
+System.out.println(decimal1.equals(decimal2.setScale(2)));
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;字符串&quot;&gt;&lt;a href=&quot;#字符串&quot; class=&quot;headerlink&quot; title=&quot;字符串&quot;&gt;&lt;/a&gt;字符串&lt;/h2&gt;&lt;h4 id=&quot;不要重复创建String对象&quot;&gt;&lt;a href=&quot;#不要重复创建String对象&quot; class=&quot;headerlink&quot; title=&quot;不要重复创建String对象&quot;&gt;&lt;/a&gt;不要重复创建String对象&lt;/h4&gt;&lt;p&gt;使用双引号（””）包围的字符串本身就是一个String对象，由于String是不可变的，所以可以直接使用，不要再用new String去创建新对象。&lt;/p&gt;
+&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// bad
+String s = new String(&amp;quot;abc&amp;quot;);
+// good
+String s = &amp;quot;abc&amp;quot;;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用StringBuilder连接字符串&quot;&gt;&lt;a href=&quot;#使用StringBuilder连接字符串&quot; class=&quot;headerlink&quot; title=&quot;使用StringBuilder连接字符串&quot;&gt;&lt;/a&gt;使用StringBuilder连接字符串&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;使用+连接字符串时每使用一次+会重新构造一个String（简单情况下可能会优化为使用StringBuilder），
+涉及多次数组复制，效率很低，StringBuilder使用动态增长的数组存储字符，效率高。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// bad
+String join(List&amp;lt;String&amp;gt; list) {
+    String joined = &amp;quot;&amp;quot;;
+    for (String s : list) {
+        joined += s;
+    }
+    return joined;
+}
+
+// good
+String join(List&amp;lt;String&amp;gt; list) {
+    StringBuilder joinedBuilder = new StringBuilder();
+    for (String s : list) {
+        joinedBuilder.append(s);
+    }
+    return joinedBuilder.toString();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用StringBuilder时，如果可能，指定容量&quot;&gt;&lt;a href=&quot;#使用StringBuilder时，如果可能，指定容量&quot; class=&quot;headerlink&quot; title=&quot;使用StringBuilder时，如果可能，指定容量&quot;&gt;&lt;/a&gt;使用StringBuilder时，如果可能，指定容量&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;如果不指定容量，StringBuilder容量动态增加，涉及到创建临时数组和数组复制，影响性能。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;String repeat(String string, int count) {
+    StringBuilder buffer = new StringBuilder(string.length() * count);
+    for(int i = 0; i &amp;lt; count; i++) {
+        buffer.append(string);
+    }
+    return buffer.toString();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;不要用String代替其他类型&quot;&gt;&lt;a href=&quot;#不要用String代替其他类型&quot; class=&quot;headerlink&quot; title=&quot;不要用String代替其他类型&quot;&gt;&lt;/a&gt;不要用String代替其他类型&lt;/h4&gt;&lt;p&gt;从IO或者远程调用得到String后，如果可能，应先转为合适的类型再做后续处理；在程序内部，除了日志、前后端交互等必须使用String的场景外，应避免将其他类型对象转为String后再做处理。&lt;/p&gt;
+&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. String更占空间
+2. String丢失了数据的原始类型，难做类型校验
+3. 对String的处理通常比原数据类型的处理效率更低
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// bad，效率低，费空间
+class SimpleCache1 {
+    private Map&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;String, String&amp;gt;();
+
+    public void put(long id1, long id2, String value) {
+        map.put(id1 + &amp;quot;&amp;amp;&amp;quot; + id2, value);
+    }
+
+    public String get(long id1, long id2) {
+        return map.get(id1 + &amp;quot;&amp;amp;&amp;quot; + id2);
+    }
+}
+
+// good，效率高，省空间
+class SimpleCache2 {
+    static class Ids {
+        private long id1;
+        private long id2;
+
+        public Ids(long id1, long id2) {
+            this.id1 = id1;
+            this.id2 = id2;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + (int) (id1 ^ (id1 &amp;gt;&amp;gt;&amp;gt; 32));
+            result = prime * result + (int) (id2 ^ (id2 &amp;gt;&amp;gt;&amp;gt; 32));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (!(obj instanceof Ids)) {
+                return false;
+            }
+            Ids other = (Ids) obj;
+            if (id1 != other.id1) {
+                return false;
+            }
+            if (id2 != other.id2) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    private Map&amp;lt;Ids, String&amp;gt; map = new HashMap&amp;lt;Ids, String&amp;gt;();
+
+    public void put(long id1, long id2, String value) {
+        map.put(new Ids(id1, id2), value);
+    }
+
+    public String get(long id1, long id2) {
+        return map.get(new Ids(id1, id2));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用预编译的正则表达式&quot;&gt;&lt;a href=&quot;#使用预编译的正则表达式&quot; class=&quot;headerlink&quot; title=&quot;使用预编译的正则表达式&quot;&gt;&lt;/a&gt;使用预编译的正则表达式&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;复杂正则表达式的编译比较耗时
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// bad，每次调用string.replaceAll都会创建Pattern
+List&amp;lt;String&amp;gt; replaceAll1(List&amp;lt;String&amp;gt; strings, String regex, String  replacement) {
+    List&amp;lt;String&amp;gt; replaced = new ArrayList&amp;lt;String&amp;gt;(strings.size());
+    for (String string : strings) {
+        replaced.add(string.replaceAll(regex, replacement));
+    }
+    return replaced;
+}
+
+// good
+List&amp;lt;String&amp;gt; replaceAll2(List&amp;lt;String&amp;gt; strings, String regex, String replacement) {
+    List&amp;lt;String&amp;gt; replaced = new ArrayList&amp;lt;String&amp;gt;(strings.size());
+    Pattern pattern = Pattern.compile(regex);
+    for (String string : strings) {
+        Matcher matcher = pattern.matcher(string);
+        replaced.add(matcher.replaceAll(replacement));
+    }
+    return replaced;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;慎用String-intern&quot;&gt;&lt;a href=&quot;#慎用String-intern&quot; class=&quot;headerlink&quot; title=&quot;慎用String.intern()&quot;&gt;&lt;/a&gt;慎用String.intern()&lt;/h4&gt;&lt;p&gt;String.intern()对两个a.equals(b)的String返回相同的引用，看起来能节省空间，但要慎用，尤其是在java6中。&lt;/p&gt;
+&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. java6中intern字符串池是创建在PermGen上的，PermGen通常设置的比较小，且运行时不可扩展，
+   String.intern()容易引起PermGen内存溢出
+2. java7和8中intern字符串池是创建在heap上的，但大小是固定的，可以通过jvm参数-XX:StringTableSize修改，
+   修改时需要注意选择合适的大小，否则性能会严重退化，建议设置成接近字符串数两倍的一个素数
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;集合&quot;&gt;&lt;a href=&quot;#集合&quot; class=&quot;headerlink&quot; title=&quot;集合&quot;&gt;&lt;/a&gt;集合&lt;/h2&gt;&lt;h4 id=&quot;返回值类型为集合时不要返回null，返回空集合&quot;&gt;&lt;a href=&quot;#返回值类型为集合时不要返回null，返回空集合&quot; class=&quot;headerlink&quot; title=&quot;返回值类型为集合时不要返回null，返回空集合&quot;&gt;&lt;/a&gt;返回值类型为集合时不要返回null，返回空集合&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;空集合和非空集合使用方法一致，null需要做特判，增加代码复杂度。
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用Collections创建小集合&quot;&gt;&lt;a href=&quot;#使用Collections创建小集合&quot; class=&quot;headerlink&quot; title=&quot;使用Collections创建小集合&quot;&gt;&lt;/a&gt;使用Collections创建小集合&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Collections中提供了创建不可变空集合（emptyXxx）和单元素集合（singletonXxx）的工厂方法，使用这些方法创建的小集合省空间，效率高。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;List&amp;lt;String&amp;gt; splitToList(String input, String separator) {
+    if (input == null) {
+        return Collections.emptyList();
+    }
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）&quot;&gt;&lt;a href=&quot;#使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）&quot; class=&quot;headerlink&quot; title=&quot;使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）&quot;&gt;&lt;/a&gt;使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;这类集合通常使用数组保存数据，如果数组填满，会创建一个新数组，将数据复制到新数组中，然后利用新数组存储数据，数组增长过程既费时又费空间。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;List&amp;lt;String&amp;gt; joinKeyValue(Map&amp;lt;String, String&amp;gt; map) {
+    List&amp;lt;String&amp;gt; result = new ArrayList(map.size());
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;默认使用ArrayList，有特殊需求时使用LinkedList&quot;&gt;&lt;a href=&quot;#默认使用ArrayList，有特殊需求时使用LinkedList&quot; class=&quot;headerlink&quot; title=&quot;默认使用ArrayList，有特殊需求时使用LinkedList&quot;&gt;&lt;/a&gt;默认使用ArrayList，有特殊需求时使用LinkedList&lt;/h4&gt;&lt;p&gt;当只使用List接口定义的方法时，使用ArrayList，在有以下需求时使用LinkedList：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 使用Deque接口定义的方法
+2. 在List中间频繁执行add或remove操作，这时应使用Iterator或ListIterator顺序访问，不要使用List.add(int,T)和List.remove(int)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. LinkedList比ArrayList更占空间，LinkedList使用Node存储数据，Node中有previous、next引用，都需要占用额外空间
+2. ArrayList随机访问速度比LinkedList快
+3. LinkedList顺序访问过程中进行add或remove时只需改变部分引用，效率较高
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用EnumMap和EnumSet存储enum&quot;&gt;&lt;a href=&quot;#使用EnumMap和EnumSet存储enum&quot; class=&quot;headerlink&quot; title=&quot;使用EnumMap和EnumSet存储enum&quot;&gt;&lt;/a&gt;使用EnumMap和EnumSet存储enum&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. EnumMap使用简单的数组存储value，省空间，效率高
+2. EnumSet使用位域存储数据，省空间，效率高
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;去掉不必要的Map-containsKey和Set-contains调用&quot;&gt;&lt;a href=&quot;#去掉不必要的Map-containsKey和Set-contains调用&quot; class=&quot;headerlink&quot; title=&quot;去掉不必要的Map.containsKey和Set.contains调用&quot;&gt;&lt;/a&gt;去掉不必要的Map.containsKey和Set.contains调用&lt;/h4&gt;&lt;p&gt;有些组合操作可以避免使用Map.containsKey和Set.contains，提高效率&lt;br&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Map&amp;lt;K, V&amp;gt; map = new HashMap&amp;lt;K, V&amp;gt;();
+// bad，不必要的containsKey
+if (map.containsKey(key)) {
+    System.out.println(map.get(key).size());
+}
+// good
+V value = map.get(key);
+if (value != null) {
+    System.out.println(value.size());
+}
+
+Map&amp;lt;K, List&amp;lt;V&amp;gt;&amp;gt; listMap = new HashMap&amp;lt;K, List&amp;lt;V&amp;gt;&amp;gt;();
+// bad，不必要的containsKey
+if (!listMap.containsKey(k)) {
+    listMap.put(k, new ArrayList&amp;lt;V&amp;gt;());
+}
+listMap.get(k).add(v);
+// good
+List&amp;lt;V&amp;gt; list = listMap.get(k);
+if (list == null) {
+    list = new ArrayList();
+    listMap.put(k, list);
+}
+list.add(v);
+
+Set&amp;lt;V&amp;gt; set = new HashSet&amp;lt;V&amp;gt;();
+// bad，不必要的contains
+if (!set.contains(value)) {
+    set.add(value);
+    // do something
+}
+// good
+if (set.add(value)){
+    // do something
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;Key插入Hash集合后确保hashCode的值不变&quot;&gt;&lt;a href=&quot;#Key插入Hash集合后确保hashCode的值不变&quot; class=&quot;headerlink&quot; title=&quot;Key插入Hash集合后确保hashCode的值不变&quot;&gt;&lt;/a&gt;Key插入Hash集合后确保hashCode的值不变&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;改变hashCode值后可能会找不到原来插入的值。
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;默认使用Hash-Map-Set&quot;&gt;&lt;a href=&quot;#默认使用Hash-Map-Set&quot; class=&quot;headerlink&quot; title=&quot;默认使用Hash[ Map,Set ]&quot;&gt;&lt;/a&gt;默认使用Hash[ Map,Set ]&lt;/h4&gt;&lt;p&gt;在没有其他需求时默认使用Hash[ Map,Set ]，需要有序时使用TreeMap，需要按插入顺序有序时使用LinkedHashMap，需要并发时使用ConcurrentHashMap。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;基于Hash的实现在大部分情况下性能都比较好。
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;不要在for-中修改集合&quot;&gt;&lt;a href=&quot;#不要在for-中修改集合&quot; class=&quot;headerlink&quot; title=&quot;不要在for( : )中修改集合&quot;&gt;&lt;/a&gt;不要在for( : )中修改集合&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;会对集合创建多个Iterator，导致抛ConcurrentModificationException
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// bad
+for (int i : list) {
+    if (i % 10 == 0) {
+        list.remove(i);
+    }
+}
+// good
+for (Iterator&amp;lt;Integer&amp;gt; iterator = list.iterator(); iterator.hasNext();) {
+    int i = iterator.next();
+    if (i % 10 == 0) {
+        iterator.remove();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;考虑使用BitSet&quot;&gt;&lt;a href=&quot;#考虑使用BitSet&quot; class=&quot;headerlink&quot; title=&quot;考虑使用BitSet&quot;&gt;&lt;/a&gt;考虑使用BitSet&lt;/h4&gt;&lt;p&gt;当需要使用Set&amp;lt;[Integer,Short,Byte,Char]&amp;gt;并且数据集中在较小范围内时，可以使用BitSet代替。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. BitSet使用位域实现存储，省空间
+2. BitSet使用位操作实现功能，效率高
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 简单的分段BitSet，存储分段密集的数字时节省空间
+class SimpleIntSet {
+    private static final int VALUE_BITS = 10;
+    private static final int VALUE_MASK = (1 &amp;lt;&amp;lt; VALUE_BITS) - 1;
+    private Map&amp;lt;Integer, BitSet&amp;gt; bitSetMap = new HashMap&amp;lt;Integer, BitSet&amp;gt;();
+
+    public void add(int value) {
+        int key = getKey(value);
+        BitSet set = bitSetMap.get(key);
+        if (set == null) {
+            set = new BitSet(VALUE_MASK + 1);
+            bitSetMap.put(key, set);
+        }
+        set.set(getBitIndex(value));
+    }
+
+    public void remove(int value) {
+        BitSet set = bitSetMap.get(getKey(value));
+        if (set != null) {
+            set.clear(getBitIndex(value));
+        }
+    }
+
+    public boolean contains(int value) {
+        BitSet set = bitSetMap.get(getKey(value));
+        return set == null || set.get(getBitIndex(value));
+    }
+
+    private int getBitIndex(int value) {
+        return value &amp;amp; VALUE_MASK;
+    }
+
+    private int getKey(int value) {
+        return value &amp;gt;&amp;gt; VALUE_BITS;
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;谨慎使用数组的equals和hashCode&quot;&gt;&lt;a href=&quot;#谨慎使用数组的equals和hashCode&quot; class=&quot;headerlink&quot; title=&quot;谨慎使用数组的equals和hashCode&quot;&gt;&lt;/a&gt;谨慎使用数组的equals和hashCode&lt;/h4&gt;&lt;p&gt;数组的equals和hashCode是Object中的默认实现，大部分情况下都不满足需求。需要使用equals和hashCode时，可以使用Buffer封装（基本类型数组），利用Arrays中提供的静态方法，使用Arrays.asList封装为List。&lt;/p&gt;
+&lt;h4 id=&quot;使用Arrays操作数组&quot;&gt;&lt;a href=&quot;#使用Arrays操作数组&quot; class=&quot;headerlink&quot; title=&quot;使用Arrays操作数组&quot;&gt;&lt;/a&gt;使用Arrays操作数组&lt;/h4&gt;&lt;p&gt;Java数组本身提供的方法很少，Arrays中提供了toString、equals、hashCode、copy操作数组的静态方法，可以利用这些方法方便地使用数组。&lt;br&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// copyOfRange
+int[] shiftLeft(int[] original, int shiftLength) {
+    int from = Math.min(original.length, shiftLength);
+    int to = from + original.length;
+    return Arrays.copyOfRange(original, from, to);
+}
+// deepToString
+int[][][] threeDArray = new int[][][]{{{1,2,3},{4}},{{5},{6,7}}};
+System.out.println(Arrays.deepToString(threeDArray));
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用第三方库提升效率&quot;&gt;&lt;a href=&quot;#使用第三方库提升效率&quot; class=&quot;headerlink&quot; title=&quot;使用第三方库提升效率&quot;&gt;&lt;/a&gt;使用第三方库提升效率&lt;/h4&gt;&lt;p&gt;在Java标准库中提供的集合在空间和时间复杂度上不能满足需求时，可以尝试trove等第三方库。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. Java标准集合都是使用范型实现的，当存储数据为基本类型时需要封装，有额外的空间和性能消耗
+2. Java标准库中常用的Set（HashSet，TreeSet，LinkedHashSet）是封装Map实现的，Map中value所占的空间被浪费了
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;并发&quot;&gt;&lt;a href=&quot;#并发&quot; class=&quot;headerlink&quot; title=&quot;并发&quot;&gt;&lt;/a&gt;并发&lt;/h2&gt;&lt;h4 id=&quot;Lazy-initialization&quot;&gt;&lt;a href=&quot;#Lazy-initialization&quot; class=&quot;headerlink&quot; title=&quot;Lazy initialization&quot;&gt;&lt;/a&gt;Lazy initialization&lt;/h4&gt;&lt;p&gt;Java中常用的Lazy initialization方式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//使用静态辅助类
+class SomeClass {
+    private static class InstanceHolder {
+        static SomeClass instance = new SomeClass();
+    }
+
+    public static SomeClass getInstance() {
+        return InstanceHolder.instance;
+    }
+}
+
+//使用volatile的double check
+class SomeFactory {
+    // 注意必须有volatile
+    private volatile SomeClass someObject;
+
+    public SomeClass getSomeObject() {
+        if (someObject == null) {
+            synchronized (this) {
+                if (someObject == null) {
+                    someObject = new SomeClass();
+                }
+            }
+        }
+        return someObject;
+    }
+}
+
+// 使用final的double check
+class FinalWrapper&amp;lt;T&amp;gt; {
+    // 注意必须有final
+    private final T value;
+
+    FinalWrapper(T value) {
+        this.value = value;
+    }
+
+    T getValue() {
+        return value;
+    }
+}
+
+class SomeFactory {
+    private FinalWrapper&amp;lt;SomeClass&amp;gt; finalWrapper;
+
+    public SomeClass getSomeObject() {
+        if (finalWrapper == null) {
+            synchronized (this) {
+                if (finalWrapper == null) {
+                    finalWrapper = new FinalWrapper&amp;lt;SomeClass&amp;gt;(new SomeClass());
+                }
+            }
+        }
+        return finalWrapper.getValue();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;####优先使用ConcurrentMap&lt;br&gt;需要并发Map时优先使用ConcurrentMap，包括无序的ConcurrentHashMap和有序的ConcurrentSkipListMap。&lt;/p&gt;
+&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. ConcurrentMap内部使用锁分段等并发优化技术实现，在高并发情况下比简单的使用锁封装map以及使用Collections.synchronizedMap效率高
+2. ConcurrentMap有compare and set方式的putIfAbsent、remove、replace原子操作，可以简化并发程序实现方式
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// “如果map中有key，返回value；如果没有，新建一个value，放入map中，然后返回”功能的安全高效实现
+Value createIfAbsent(ConcurrentMap&amp;lt;Key, Value&amp;gt; map, Key key) {
+    Value value = map.get(key);
+    if (value != null) {
+        return value;
+    }
+    value = new Value();
+    Value oldValue = map.putIfAbsent(key, value);
+    if (oldValue != null) {
+        return oldValue;
+    } else {
+        return value;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;####考虑使用CopyOnWrite集合&lt;br&gt;当集合的读远多于写时可以考虑使用CopyOnWrite集合，java标准库中提供了CopyOnWriteArrayList和CopyOnWriteArraySet。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CopyOnWrite集合的读操作未加锁，效率高
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;优先使用线程池（Executor）&quot;&gt;&lt;a href=&quot;#优先使用线程池（Executor）&quot; class=&quot;headerlink&quot; title=&quot;优先使用线程池（Executor）&quot;&gt;&lt;/a&gt;优先使用线程池（Executor）&lt;/h4&gt;&lt;p&gt;在创建线程时优先考虑使用线程池，而不是直接创建Thread。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 使用线程池便于控制线程数
+2. 使用线程池便于对任务进行统一管理
+3. 使用线程池可以复用线程，减少创建、销毁线程的开支
+4. 利用Future可以方便地进行异步调用和超时控制
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意在使用线程池时ThreadLocal等属于线程的资源也会被复用。&lt;/p&gt;
+&lt;p&gt;####优先使用Atomic[Type]&lt;br&gt;java.util.concurrent.atomic提供了部分基本类型及其数组的Atomic封装，在并发环境下应当优先使用。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. Atomic使用volatile语义及底层compareAndSet实现，高并发情况下效率比直接用锁高
+2. 提供了原子的[update]AndGet以及getAnd[Update]方法，效率高，使用方便
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;####选择合适的锁&lt;br&gt;默认使用synchronized，需要更多控制时使用ReentrantLock，读多于写时考虑使用ReentrantReadWriteLock。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. synchronized用法最简单，不容易出错
+2. ReentrantLock比synchronized功能更多（处理中断，tryLock，多个condition...）
+3. ReentrantReadWriteLock读写锁分离，可并发读
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;##IO&lt;/p&gt;
+&lt;p&gt;####指定编码&lt;br&gt;涉及流（stream、byte）和字符（char、String）转换的地方一定要指定编码。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;如果不指定编码，程序会使用默认编码，默认编码在开发机、测试机、线上环境可能不一样，引发难以测试和复现的问题
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;byte[] bytes = ...
+// bad
+String s = new String(bytes);
+// good
+String s = new String(bytes, Charset.forName(&amp;quot;utf-8&amp;quot;));
+
+// bad，不要用FileReader，因为无法指定编码
+BufferedReader reader = new BufferedReader(new FileReader(&amp;quot;/home/work/somefile&amp;quot;));
+// good
+BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(&amp;quot;/home/work/somefile&amp;quot;), Charset.forName(&amp;quot;utf-8&amp;quot;)));
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;####合理使用ByteArrayOutputStream&lt;br&gt;ByteArrayOutputStream有以下缺点，使用时需要注意：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. write方法是synchronized方法，影响性能
+2. toByteArray会复制一个新的byte数组，影响性能，占用空间
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在使用时可以采取如下方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 如果byte数组长度已知，不要使用ByteArrayOutputStream，使用ByteBuffer
+2. 如果byte数组需要输出到一个stream，使用ByteArrayOutputStream.writeTo(OutputStream stream)
+3. 如果byte数组需要转成字符串，使用ByteArrayOutputStream.toString(String charsetName)
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;及时关闭IO资源&quot;&gt;&lt;a href=&quot;#及时关闭IO资源&quot; class=&quot;headerlink&quot; title=&quot;及时关闭IO资源&quot;&gt;&lt;/a&gt;及时关闭IO资源&lt;/h4&gt;&lt;p&gt;使用完IO资源后应该尽快关闭，否则会引起资源泄漏，资源关闭需要在finally里面进行，有些资源关闭时会抛IOException，在不关注这个异常时推荐使用org.apache.commons.io.IOUtils.closeQuietly方法。&lt;/p&gt;
+&lt;h4 id=&quot;不要一次把大文件的所有内容都读入内存&quot;&gt;&lt;a href=&quot;#不要一次把大文件的所有内容都读入内存&quot; class=&quot;headerlink&quot; title=&quot;不要一次把大文件的所有内容都读入内存&quot;&gt;&lt;/a&gt;不要一次把大文件的所有内容都读入内存&lt;/h4&gt;&lt;p&gt;这样容易引起OOM，应当分块读入文件，边读边处理。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;File file = new File(&amp;quot;somefile&amp;quot;);
+try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file))) {
+    // bad
+    byte[] bytes = new byte[(int) file.length()];
+    stream.read(bytes);
+    // Do something
+}
+
+try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file))) {
+    // good
+    byte[] bytes = new byte[10240];
+    int readCount = 0;
+    while ((readCount = stream.read(bytes)) != -1) {
+        // Do something
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;其他&quot;&gt;&lt;a href=&quot;#其他&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h2&gt;&lt;h4 id=&quot;内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间&quot;&gt;&lt;a href=&quot;#内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间&quot; class=&quot;headerlink&quot; title=&quot;内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间&quot;&gt;&lt;/a&gt;内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Date只是对毫秒数的简单封装，没有必要创建Date对象再获得毫秒数。
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;避免并发使用java-text-SimpleDateFormat&quot;&gt;&lt;a href=&quot;#避免并发使用java-text-SimpleDateFormat&quot; class=&quot;headerlink&quot; title=&quot;避免并发使用java.text.SimpleDateFormat&quot;&gt;&lt;/a&gt;避免并发使用java.text.SimpleDateFormat&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SimpleDateFormat不是线程安全的，建议使用apache commons-lang的FastDateFormat等第三方库。
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;使用不可变对象&quot;&gt;&lt;a href=&quot;#使用不可变对象&quot; class=&quot;headerlink&quot; title=&quot;使用不可变对象&quot;&gt;&lt;/a&gt;使用不可变对象&lt;/h4&gt;&lt;p&gt;不可变对象有以下优点：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 线程安全
+2. 可以缓存
+3. 可以缓存hashCode等计算结果
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;不要使用异常代替正常执行流程&quot;&gt;&lt;a href=&quot;#不要使用异常代替正常执行流程&quot; class=&quot;headerlink&quot; title=&quot;不要使用异常代替正常执行流程&quot;&gt;&lt;/a&gt;不要使用异常代替正常执行流程&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Java中创建异常需要填充stackTrace，代价非常高，异常应当只用于表示在正常流程之外且很少发生的情况
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;多用final&quot;&gt;&lt;a href=&quot;#多用final&quot; class=&quot;headerlink&quot; title=&quot;多用final&quot;&gt;&lt;/a&gt;多用final&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. jvm更容易对final域及final方法进行优化，提高运行时效率
+2. 编译器可以利用final及时提示代码错误
+3. 正确初始化的final域在并发环境下可以保证安全发布
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;不要在生产环境使用System-out-print-ln-写日志&quot;&gt;&lt;a href=&quot;#不要在生产环境使用System-out-print-ln-写日志&quot; class=&quot;headerlink&quot; title=&quot;不要在生产环境使用System.out.print[ln]写日志&quot;&gt;&lt;/a&gt;不要在生产环境使用System.out.print[ln]写日志&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. System.out.print[ln]默认输出到控制台，难管理
+2. System.out.print[ln]不支持日志分级
+3. System.out.print[ln]默认遇到&amp;apos;\n&amp;apos;就会flush，效率较低
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;打日志时不要急于将对象转为String&quot;&gt;&lt;a href=&quot;#打日志时不要急于将对象转为String&quot; class=&quot;headerlink&quot; title=&quot;打日志时不要急于将对象转为String&quot;&gt;&lt;/a&gt;打日志时不要急于将对象转为String&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;日志是有级别的，打印级别低于系统设置级别的日志不会被输出，这些日志提前转为String浪费资源
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// slf4j bad
+logger.debug(someLogObject.toString());
+logger.debug(&amp;quot;Log object1: &amp;quot; + someLogObject1 + &amp;quot;, object2: &amp;quot; + someLogObject2);
+// slf4j good
+logger.debug(&amp;quot;{}&amp;quot;, someLogObject);
+logger.debug(&amp;quot;Log object1: {}, object2: {}&amp;quot;, someLogObject1, someLogObject2);
+
+// log4j bad
+logger.debug(someLogObject.toString());
+logger.debug(&amp;quot;Log object1: &amp;quot; + someLogObject1 + &amp;quot;, object2: &amp;quot; + someLogObject2);
+// log4j good
+logger.debug(someLogObject);
+if (logger.isDebugEnabled()) {
+    logger.debug(new StringBuilder(&amp;quot;Log object1: &amp;quot;)
+            .append(someLogObject1)
+            .append(&amp;quot;, object2: &amp;quot;)
+            .append(someLogObject2));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;从上面的代码可以看出，实现相同的功能log4j比slf4j需要多一次判断，不够简洁，所以不建议直接使用log4j，使用slf4j封装或者使用其他有占位符的日志框架，比如logback。&lt;/p&gt;
+&lt;h4 id=&quot;选择性使用&quot;&gt;&lt;a href=&quot;#选择性使用&quot; class=&quot;headerlink&quot; title=&quot;选择性使用==&quot;&gt;&lt;/a&gt;选择性使用==&lt;/h4&gt;&lt;p&gt;对基本类型使用==时，比较的是数据是否完全一致，对引用类型使用==时，比较的是引用地址是否一致，以下情况可以安全地使用==比较是否相等：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 整数基本类型
+2. 枚举类型
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其他情况下，==比较的是两者是否为同一对象。java.util.IdentityHashMap是仅使用==比较key是否相等的HashMap，在有些场景下可以用来提高效率。&lt;/p&gt;
+&lt;h4 id=&quot;优先使用static成员类&quot;&gt;&lt;a href=&quot;#优先使用static成员类&quot; class=&quot;headerlink&quot; title=&quot;优先使用static成员类&quot;&gt;&lt;/a&gt;优先使用static成员类&lt;/h4&gt;&lt;p&gt;static成员类与非static成员类的区别是非static成员类包含一个外部类的指针，可以访问外部类的非静态资源。当需要使用成员类时，默认使用static成员类，除非需要访问外部类的非静态资源。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 非static内部类占用额外空间存储外部类的引用
+2. 非static内部类影响外部类对象的内存回收，可能会引起内存泄漏
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;及时释放对象引用&quot;&gt;&lt;a href=&quot;#及时释放对象引用&quot; class=&quot;headerlink&quot; title=&quot;及时释放对象引用&quot;&gt;&lt;/a&gt;及时释放对象引用&lt;/h4&gt;&lt;p&gt;及时释放对象引用可以让jvm及时释放内存空间，忘记释放对象引用可能会引起内存泄漏。&lt;br&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class SimpleStack {
+    private Object[] array = new Object[10];
+    private int index = 0;
+
+    public void push(Object value) {
+        if (index == array.length) {
+            array = Arrays.copyOf(array, array.length * 2);
+        }
+        array[index++] = value;
+    }
+
+    public Object pop() {
+        // 这里内存泄漏，需要在返回前将array[index]置为null
+        return array[--index];
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;使用enum&quot;&gt;&lt;a href=&quot;#使用enum&quot; class=&quot;headerlink&quot; title=&quot;使用enum&quot;&gt;&lt;/a&gt;使用enum&lt;/h2&gt;&lt;p&gt;使用enum替代常量。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. enum是类型安全的
+2. enum可以定义方法，功能强大
+3. enum可以使用==进行比较，使用EnumHashMap等工具，效率高
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;举例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class Constants{
+    public static final String OS_ANDROID = &amp;quot;Android&amp;quot;;
+    public static final String OS_IOS = &amp;quot;iOS&amp;quot;;
+}
+
+public enum Os {
+    ANDROID(&amp;quot;Android&amp;quot;),
+    IOS(&amp;quot;iOS&amp;quot;);
+
+    private String osName;
+
+    private Os(String osName) {
+        this.osName = osName;
+    }
+
+    public String getOsName() {
+        return this.osName;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;慎用enum的ordinal&quot;&gt;&lt;a href=&quot;#慎用enum的ordinal&quot; class=&quot;headerlink&quot; title=&quot;慎用enum的ordinal&quot;&gt;&lt;/a&gt;慎用enum的ordinal&lt;/h4&gt;&lt;p&gt;在程序中要慎用enum的ordinal，尤其在需要持久化的场景，需要使用数字表达时可以用自定义值代替。&lt;br&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 调整常量顺序或者删除常量时ordinal会发生变化
+2. ordinal只与常量顺序有关，无法定义有意义的值
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;少用反射&quot;&gt;&lt;a href=&quot;#少用反射&quot; class=&quot;headerlink&quot; title=&quot;少用反射&quot;&gt;&lt;/a&gt;少用反射&lt;/h4&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 反射无法进行编译检查，降低了提早发现问题的可能性，无法方便地发现调用点，增加重构难度
+2. 损失性能，反射比正常方法调用要慢
+3. 反射代码不如直接调用简洁
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;轮子优先级&quot;&gt;&lt;a href=&quot;#轮子优先级&quot; class=&quot;headerlink&quot; title=&quot;轮子优先级&quot;&gt;&lt;/a&gt;轮子优先级&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;1. 标准库
+2. 第三方库
+3. 自己造
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;推荐的第三方库&quot;&gt;&lt;a href=&quot;#推荐的第三方库&quot; class=&quot;headerlink&quot; title=&quot;推荐的第三方库&quot;&gt;&lt;/a&gt;推荐的第三方库&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;1. apache-commons，java.lang的补充，提供了很多辅助工具
+2. apache-collections，java集合的补充，提供了很多集合操作工具和新的集合
+3. guava，提供了很多集合、并发、缓存等方面的工具
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;推荐阅读&quot;&gt;&lt;a href=&quot;#推荐阅读&quot; class=&quot;headerlink&quot; title=&quot;推荐阅读&quot;&gt;&lt;/a&gt;推荐阅读&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;1. Effective Java (Second Edition)
+2. Java Concurrency in Practice
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;转自喜马拉雅军校第一期班&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;本文示例为了突出重点，没有写参数检
+    
+    </summary>
+    
+      <category term="技术" scheme="http://yoursite.com/categories/program/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>OOAD5大原则理解</title>
     <link href="http://yoursite.com/2016/07/19/OOAD5%E5%A4%A7%E5%8E%9F%E5%88%99%E7%90%86%E8%A7%A3/"/>
     <id>http://yoursite.com/2016/07/19/OOAD5大原则理解/</id>
     <published>2016-07-19T06:26:51.000Z</published>
-    <updated>2016-07-19T11:45:21.000Z</updated>
+    <updated>2016-07-19T11:47:34.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;a href=&quot;#OOAD的5大原则有什么用&quot; class=&quot;headerlink&quot; title=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;/a&gt;OOAD的5大原则有什么用&lt;/h2&gt;&lt;p&gt;在聊OOAD的5大原则具体是啥前，先简单介绍下OOAD这些原则有什么用。OOAD出现在上世纪80年代，起因是航天事业的发展第一次出现超10w代码行的软件项目。面对超10w代码行的项目，如果继续采取基于过程的设计形式，开发者很难互相理解并协助。这时出现的面向对象程序设计能够更好地切分项目模块，开发者也方便理解项目代码逻辑，接口更让让协作简化。而本文介绍的这5个原则是OOAD存在和实现的基础，践行这些标准可以最大程度地软件设计质量。这些原则都出自一个出发点，即&lt;code&gt;高内聚&amp;amp;低耦合&lt;/code&gt;。那下面我们就来具体介绍这所谓的OOAD5大原则。&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;a href=&quot;#OOAD的5大原则有什么用&quot; class=&quot;headerlink&quot; title=&quot;OOAD的5大原则有什么用?&quot;&gt;&lt;/a&gt;OOAD的5大原则有什么用?&lt;/h2&gt;&lt;p&gt;在聊OOAD的5大原则具体是啥前，先简单介绍下OOAD这些原则有什么用。OOAD出现在上世纪80年代，起因是航天事业的发展第一次出现超10w代码行的软件项目。面对超10w代码行的项目，如果继续采取基于过程的设计形式，开发者很难互相理解并协助。这时出现的面向对象程序设计能够更好地切分项目模块，开发者也方便理解项目代码逻辑，接口更让让协作简化。而本文介绍的这5个原则是OOAD存在和实现的基础，践行这些标准可以最大程度地软件设计质量。这些原则都出自一个出发点，即&lt;code&gt;高内聚&amp;amp;低耦合&lt;/code&gt;。那下面我们就来具体介绍这所谓的OOAD5大原则。&lt;/p&gt;
 &lt;h2 id=&quot;1-ocp开闭原则&quot;&gt;&lt;a href=&quot;#1-ocp开闭原则&quot; class=&quot;headerlink&quot; title=&quot;1. ocp开闭原则&quot;&gt;&lt;/a&gt;1. ocp开闭原则&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;软件实体对扩展是开放的，但对修改是关闭的，即在不修改一个软件实体的基础上去扩展其功能。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;这个原则明显是建立在基于接口编程的基础上，在基于接口的编程场景下，接口会在第一时间被建立起来，而业务相关方都会根据这个定义好的接口来开展业务（调用或实现）。而在后续业务不断发展的过程中，接口的实现可能会根据需要进行迭代修改，但是调用方肯定不希望接口的定义改变，这样就需要不断修改调用点。从面向对象的角度上来说，调用方并不关心接口的实现，所以应该尽量采取可扩展的方式定义接口，避免后续因为业务扩展导致接口定义的变化。举个例子，接口设计时会定义入参出参，但有时随着业务的变化我们需要增加更多入参。这是如果我们直接显示地改变原方法入参的个数，可能直接导致原接口不能使用，调用方需要被动配合修改。&lt;/p&gt;
 &lt;p&gt;一个比较好的可解决方法是再增加一个多参接口，这符合我们对扩展是开放的，但对修改是关闭的原则。对应老的调用业务也没有任何影响，唯一要做的可能是通知调用方，后续改使用新接口。但这样的缺点就是随着时间推移，大量废弃接口会同时存在于系统上，并且这些仅增加入参的方法必然会产生很多的重复代码，影响系统整体的健壮性和代码美观度。&lt;/p&gt;
@@ -43,7 +649,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;a href=&quot;#OOAD的5大原则有什么用&quot; class=&quot;headerlink&quot; title=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;/a&gt;OOAD的5大原则有什么用&lt;/h2&gt;&lt;p&gt;在聊OOAD的5大原则具体是啥前，先简单介绍下OOA
+      &lt;h2 id=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;a href=&quot;#OOAD的5大原则有什么用&quot; class=&quot;headerlink&quot; title=&quot;OOAD的5大原则有什么用?&quot;&gt;&lt;/a&gt;OOAD的5大原则有什么用?&lt;/h2&gt;&lt;p&gt;在聊OOAD的5大原则具体是啥前，先简单介绍下O
     
     </summary>
     

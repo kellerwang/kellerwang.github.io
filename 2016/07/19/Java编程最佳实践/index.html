@@ -3,17 +3,39 @@
 <head>
   <meta charset="utf-8">
   
-  <title>KylerのBlog</title>
+  <title>Java编程最佳实践 | KylerのBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="每周一篇，记录工作生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KylerのBlog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="转自喜马拉雅军校第一期班
+
+说明
+本文示例为了突出重点，没有写参数检验等代码，在实际项目中不要忽略。
+本文重点列举Java语言和标准库上的通用优化建议，遵循这些建议可以在不改变系统框架和设计的情况下减少错误，提高效率。系统级优化需要对性能做全面的监测和分析，没有通用方法，本文涉及不多，建议阅读专业的Java性能优化相关资料。
+代码首先要符合规范，保证可读性，在此基础上再优化。
+
+基本类型多用基本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程最佳实践">
+<meta property="og:url" content="http://yoursite.com/2016/07/19/Java编程最佳实践/index.html">
 <meta property="og:site_name" content="KylerのBlog">
-<meta property="og:description" content="每周一篇，记录工作生活">
+<meta property="og:description" content="转自喜马拉雅军校第一期班
+
+说明
+本文示例为了突出重点，没有写参数检验等代码，在实际项目中不要忽略。
+本文重点列举Java语言和标准库上的通用优化建议，遵循这些建议可以在不改变系统框架和设计的情况下减少错误，提高效率。系统级优化需要对性能做全面的监测和分析，没有通用方法，本文涉及不多，建议阅读专业的Java性能优化相关资料。
+代码首先要符合规范，保证可读性，在此基础上再优化。
+
+基本类型多用基本">
+<meta property="og:updated_time" content="2016-07-19T11:49:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KylerのBlog">
-<meta name="twitter:description" content="每周一篇，记录工作生活">
+<meta name="twitter:title" content="Java编程最佳实践">
+<meta name="twitter:description" content="转自喜马拉雅军校第一期班
+
+说明
+本文示例为了突出重点，没有写参数检验等代码，在实际项目中不要忽略。
+本文重点列举Java语言和标准库上的通用优化建议，遵循这些建议可以在不改变系统框架和设计的情况下减少错误，提高效率。系统级优化需要对性能做全面的监测和分析，没有通用方法，本文涉及不多，建议阅读专业的Java性能优化相关资料。
+代码首先要符合规范，保证可读性，在此基础上再优化。
+
+基本类型多用基本">
   
     <link rel="alternate" href="/atom.xml" title="KylerのBlog" type="application/atom+xml">
   
@@ -66,9 +88,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Java编程最佳实践" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Java编程最佳实践" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/19/Java编程最佳实践/" class="article-date">
   <time datetime="2016-07-19T11:47:58.000Z" itemprop="datePublished">2016-07-19</time>
@@ -85,8 +105,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/19/Java编程最佳实践/">Java编程最佳实践</a>
+    <h1 class="article-title" itemprop="name">
+      Java编程最佳实践
     </h1>
   
 
@@ -686,140 +706,19 @@ public enum Os {
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-OOAD5大原则理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/19/OOAD5大原则理解/" class="article-date">
-  <time datetime="2016-07-19T06:26:51.000Z" itemprop="datePublished">2016-07-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/program/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/19/OOAD5大原则理解/">OOAD5大原则理解</a>
-    </h1>
+    <a href="/2016/07/19/OOAD5大原则理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">OOAD5大原则理解</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="OOAD的5大原则有什么用"><a href="#OOAD的5大原则有什么用" class="headerlink" title="OOAD的5大原则有什么用?"></a>OOAD的5大原则有什么用?</h2><p>在聊OOAD的5大原则具体是啥前，先简单介绍下OOAD这些原则有什么用。OOAD出现在上世纪80年代，起因是航天事业的发展第一次出现超10w代码行的软件项目。面对超10w代码行的项目，如果继续采取基于过程的设计形式，开发者很难互相理解并协助。这时出现的面向对象程序设计能够更好地切分项目模块，开发者也方便理解项目代码逻辑，接口更让让协作简化。而本文介绍的这5个原则是OOAD存在和实现的基础，践行这些标准可以最大程度地软件设计质量。这些原则都出自一个出发点，即<code>高内聚&amp;低耦合</code>。那下面我们就来具体介绍这所谓的OOAD5大原则。</p>
-<h2 id="1-ocp开闭原则"><a href="#1-ocp开闭原则" class="headerlink" title="1. ocp开闭原则"></a>1. ocp开闭原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">软件实体对扩展是开放的，但对修改是关闭的，即在不修改一个软件实体的基础上去扩展其功能。</div></pre></td></tr></table></figure>
-<p>这个原则明显是建立在基于接口编程的基础上，在基于接口的编程场景下，接口会在第一时间被建立起来，而业务相关方都会根据这个定义好的接口来开展业务（调用或实现）。而在后续业务不断发展的过程中，接口的实现可能会根据需要进行迭代修改，但是调用方肯定不希望接口的定义改变，这样就需要不断修改调用点。从面向对象的角度上来说，调用方并不关心接口的实现，所以应该尽量采取可扩展的方式定义接口，避免后续因为业务扩展导致接口定义的变化。举个例子，接口设计时会定义入参出参，但有时随着业务的变化我们需要增加更多入参。这是如果我们直接显示地改变原方法入参的个数，可能直接导致原接口不能使用，调用方需要被动配合修改。</p>
-<p>一个比较好的可解决方法是再增加一个多参接口，这符合我们对扩展是开放的，但对修改是关闭的原则。对应老的调用业务也没有任何影响，唯一要做的可能是通知调用方，后续改使用新接口。但这样的缺点就是随着时间推移，大量废弃接口会同时存在于系统上，并且这些仅增加入参的方法必然会产生很多的重复代码，影响系统整体的健壮性和代码美观度。</p>
-<p>与此相比，我更推荐将接口出参入参都设计成对象的方法，这样当接口入参增加时，我们只需增加入参对象属性，这样的方式对接口嵌入性最小，并且不会产生废弃接口和冗余代码。</p>
-<h2 id="2-srp单一职责原则"><a href="#2-srp单一职责原则" class="headerlink" title="2. srp单一职责原则"></a>2. srp单一职责原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">类的职责要单一，不能将太多的职责放在一个类中。</div></pre></td></tr></table></figure>
-<p>这个原则很好理解，一个类里面尽量只包含一项业务。比如我们有一个账户类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">interface Account&#123;</div><div class="line">       // 获取账户id</div><div class="line">       public void getId(); </div><div class="line">       // 将账号信息存到数据库</div><div class="line">       public void save2Mysql();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>这个接口包括两个方法，一个是查看账号id，这个方法和账户类应有业务对应，应该设定在Account类中。而save2Mysql方法的功能是持久化Account对象，和账户类应有业务不相干，应该隔离在Account类外。</p>
-<h2 id="3-isp接口隔离原则"><a href="#3-isp接口隔离原则" class="headerlink" title="3. isp接口隔离原则"></a>3. isp接口隔离原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">使用多个专门的接口来取代一个统一的接口。</div></pre></td></tr></table></figure>
-<p>现实世界中，我们期待万能的东西，例如物理里的万用表，小说电影里面的万能钥匙等等。但是在软件工程领域，我们应该尽量避免一类多能。接口隔离原则和单一职责原则类似，我们设计接口时尽量隔离业务功能。记得在支付宝实习时，我见到过能够查询并修改一个业务的接口。当需求变更我们需要更新查询的业务逻辑时，修改部分的业务也不可避免地被影响了。最显而易见的后果就是，虽然仅修改了查询，但回归测试不得不把修改也包含进来。</p>
-<h2 id="4-lsp里式替换原则"><a href="#4-lsp里式替换原则" class="headerlink" title="4. lsp里式替换原则"></a>4. lsp里式替换原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在软件系统中，一个可以接受基类对象的地方必然可以接受一个子类对象。</div></pre></td></tr></table></figure>
-<p>这一原则字面上有些晦涩，但其实也很好理解。主要需要注意的地方是，当我们的子类复写（override）父类的一个方法时，要注意复写函数的功能要和父类原函数的功能保持一致。比如原来的父类函数是toString，子类方法也要是类型功能，不能突变成查询数据库或是其他。也就是说在一个软件系统中，子类应该能够完全替换任何父类能够出现的地方，并且经过替换后，不会让调用父类的客户程序从行为上有任何改变。</p>
-<h2 id="5-dip依赖倒置原则"><a href="#5-dip依赖倒置原则" class="headerlink" title="5. dip依赖倒置原则"></a>5. dip依赖倒置原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">要针对抽象层编程，而不要针对具体类编程。</div></pre></td></tr></table></figure>
-<p>这一原则在系统架构层面上非常重要，遵循这一原则的系统更易于维护，不容易受外部系统调用接口的变更而影响。在ocp开闭原则中我们提到，我们要避免接口的变更给外部调用系统带来的不利影响。但实际情况却是，猪队友不是少数，需要配合技改的接口经常出现在我们的需求列表中。</p>
-<p>假设我们在领域模型层的业务逻辑需要调用发送短信服务，所谓针对具体类编程就是指，因为我们已经知道接口的定义和如何使用，我们就任选地在我们的业务逻辑中直接使用短信接口调用短信服务。这样我们的业务代码中大量耦合了短信接口。但猪队友出现，短信接口出现了更改，悲剧随着而来，这时我们只能一个一个地修改这些使用了短信接口的业务逻辑代码点。这种方式地修改，出现错误的概率也非常高。</p>
-<p>最聪明的方法是，我们假定自己不知道短信接口的具体存在和如何调用。我们在我们的系统中自己定义一个短信调用服务的client，通过client提供短信调用的入口和出口，这样只有client出现在我们的业务代码中。一旦再次出现短信接口的更改，现在只有client调用了短信服务，我们只需要修改这一部分，绝大多数业务完全不受影响。随便提一下，这样做的另一一个好处是，我们这编写代码逻辑时，应该秉承这样的原则，所以别人写的东西都不可信任，我们把短信服务封装在client中，在client中进行错误处理。这样很好地保证了我们自己的业务代码不会被短信服务的异常中断。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/OOAD5大原则理解/" data-id="ciqteeeco00012fpe4vilrd7p" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-使用Hexo构建Blog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/15/使用Hexo构建Blog/" class="article-date">
-  <time datetime="2016-07-15T08:35:52.000Z" itemprop="datePublished">2016-07-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/program/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/15/使用Hexo构建Blog/">使用Hexo构建Blog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，于是借着这波东风赶鸭子上架，花了2h时间研究了下github快速搭建博客的方法。这里写下使用Hexo搭建Blog的主要流程作为我第一篇文章，需要的拿走不谢。</p>
-<p>另外本文参考了Google上search的一些同类型文章，首先我觉得大家写的都很赞，对这些前辈就不一一感谢了。但是多数文章Hexo和github结合的一些细节表达的还不是特别清楚，导致我读的时候也有些困惑，所以不才大胆对这些资料进行总结精炼，并且对Hexo部署到github page的细节更多说明。</p>
-<p>另外转载请尽量给个面子，标注个作者啥的。实在不愿意心里默默感谢下也算了。╮(╯▽╰)╭</p>
-<h2 id="为什么要使用Hexo-amp-Github搭建Blog？"><a href="#为什么要使用Hexo-amp-Github搭建Blog？" class="headerlink" title="为什么要使用Hexo&amp;Github搭建Blog？"></a>为什么要使用Hexo&amp;Github搭建Blog？</h2><p>这个问题有几个层面：</p>
-<ul>
-<li>第一为什么要搭建自己的Blog？我觉得对于Coder来说使用markdown、git这些语言或工具写文章可以提高效率，目前像博客园或CSDN应该还不能支持。</li>
-<li>第二为啥要用github pages？恩，对应土豪来说自己买服务器也是可以的。对于多数轻量级用户（文章写得少，访问量少）github pages不收费(300MB)方便部署很经济。</li>
-<li>第三为毛要用Hexo？恩（思考ing），同事推荐我马上就用了，另外其他人说相比Jekyll、Octopress来说Hexo更轻便更快捷。。。好吧，其他两个不太熟悉。</li>
-</ul>
-<h2 id="主要步骤"><a href="#主要步骤" class="headerlink" title="主要步骤"></a>主要步骤</h2><h3 id="github创建仓库"><a href="#github创建仓库" class="headerlink" title="github创建仓库"></a>github创建仓库</h3><p>不了解github和不知道如何创建仓库（repository）的请参考<a href="https://guides.github.com/activities/hello-world/" target="_blank" rel="external">https://guides.github.com/activities/hello-world/</a>。</p>
-<p><img src="http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/55032611.jpg" alt=""></p>
-<p>据传说repository name必须是github的username.github.io，我就是照着做的，大家可以试试不这样（期待脸）。</p>
-<p><img src="http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/26390887.jpg" alt=""></p>
-<p>创建好仓库后再setting tag中点击Launch automatic page generator，如上图。这时你访问username.github.io就可以看到github pages自动生成的静态页面网站。是不是很有成就感？然而对于使用Hexo的同学来说这步并没有什么卵用。</p>
-<h3 id="安装Node-JS"><a href="#安装Node-JS" class="headerlink" title="安装Node.JS"></a>安装Node.JS</h3><p>这一步是按照Hexo的前期准备，其实前面貌似还有一步安装git，恩。。。。。。好吧，我们忽略没有安装git的同学。</p>
-<p>安转nodejs直接到<a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs官网</a>直接下载安装包点击安装。需要注意是国内建议更换taobao的npm源，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
-<p>仅仅一条命令就是这么简单，这么屌。</p>
-<p>然后你可能需要安转一些插件，比较重要的是git自动部署插件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-<p>我是参考网上的教程，也装了些其他的，下面列出来，需不需要大家自己研究咯。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-index --save</div><div class="line">$ npm install hexo-generator-archive --save</div><div class="line">$ npm install hexo-generator-category --save</div><div class="line">$ npm install hexo-generator-tag --save</div><div class="line">$ npm install hexo-server --save</div><div class="line">$ npm install hexo-deployer-heroku --save</div><div class="line">$ npm install hexo-deployer-rsync --save</div><div class="line">$ npm install hexo-deployer-openshift --save</div><div class="line">$ npm install hexo-renderer-marked@0.2 --save</div><div class="line">$ npm install hexo-renderer-stylus@0.2 --save</div><div class="line">$ npm install hexo-generator-feed@1 --save</div><div class="line">$ npm install hexo-generator-sitemap@1 --save</div></pre></td></tr></table></figure>
-<h3 id="Hexo初始化"><a href="#Hexo初始化" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ cd &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
-<p>所有相关文件会出现在你指定的folder中。</p>
-<h3 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h3><p>这步其实也没用，执行下面命令，可以到<code>localhost：4000</code>查看效果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><p>hexo写作其实主要就如下四个命令，每次创建或修改文章都需要至少执行<code>hexo g</code>和<code>hexo d</code>两条命令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n “文章名” # 创建文章</div><div class="line">hexo clean # 恩，其实并不太知道有没有用。。。</div><div class="line">hexo g # 生成public静态文件</div><div class="line">hexo d # 发布项目到github pages</div></pre></td></tr></table></figure>
-<h3 id="部署到github-pages"><a href="#部署到github-pages" class="headerlink" title="部署到github pages"></a>部署到github pages</h3><p>Hexo的发布其实是依赖git的，所以需要修改根目录下<code>_config.yml</code>文件的<code>Deployment</code>部分。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">	type: git</div><div class="line">	repo: git@github.com:kellerwang/kellerwang.github.io.git</div><div class="line">	branch: master</div></pre></td></tr></table></figure>
-<p>需要特别注意<code>type:</code>、<code>repo:</code>和<code>branch:</code>后面需要空格，否则配置不成功。</p>
-<p>配置完成后执行<code>hexo d</code>，然后稍等片刻去愉快地访问你的username.github.io吧。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/15/使用Hexo构建Blog/" data-id="ciqteeecj00002fpe0zbidvas" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
