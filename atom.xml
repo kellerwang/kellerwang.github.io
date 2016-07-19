@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-15T10:33:41.000Z</updated>
+  <updated>2016-07-19T11:45:21.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OOAD5大原则理解</title>
+    <link href="http://yoursite.com/2016/07/19/OOAD5%E5%A4%A7%E5%8E%9F%E5%88%99%E7%90%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2016/07/19/OOAD5大原则理解/</id>
+    <published>2016-07-19T06:26:51.000Z</published>
+    <updated>2016-07-19T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;a href=&quot;#OOAD的5大原则有什么用&quot; class=&quot;headerlink&quot; title=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;/a&gt;OOAD的5大原则有什么用&lt;/h2&gt;&lt;p&gt;在聊OOAD的5大原则具体是啥前，先简单介绍下OOAD这些原则有什么用。OOAD出现在上世纪80年代，起因是航天事业的发展第一次出现超10w代码行的软件项目。面对超10w代码行的项目，如果继续采取基于过程的设计形式，开发者很难互相理解并协助。这时出现的面向对象程序设计能够更好地切分项目模块，开发者也方便理解项目代码逻辑，接口更让让协作简化。而本文介绍的这5个原则是OOAD存在和实现的基础，践行这些标准可以最大程度地软件设计质量。这些原则都出自一个出发点，即&lt;code&gt;高内聚&amp;amp;低耦合&lt;/code&gt;。那下面我们就来具体介绍这所谓的OOAD5大原则。&lt;/p&gt;
+&lt;h2 id=&quot;1-ocp开闭原则&quot;&gt;&lt;a href=&quot;#1-ocp开闭原则&quot; class=&quot;headerlink&quot; title=&quot;1. ocp开闭原则&quot;&gt;&lt;/a&gt;1. ocp开闭原则&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;软件实体对扩展是开放的，但对修改是关闭的，即在不修改一个软件实体的基础上去扩展其功能。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个原则明显是建立在基于接口编程的基础上，在基于接口的编程场景下，接口会在第一时间被建立起来，而业务相关方都会根据这个定义好的接口来开展业务（调用或实现）。而在后续业务不断发展的过程中，接口的实现可能会根据需要进行迭代修改，但是调用方肯定不希望接口的定义改变，这样就需要不断修改调用点。从面向对象的角度上来说，调用方并不关心接口的实现，所以应该尽量采取可扩展的方式定义接口，避免后续因为业务扩展导致接口定义的变化。举个例子，接口设计时会定义入参出参，但有时随着业务的变化我们需要增加更多入参。这是如果我们直接显示地改变原方法入参的个数，可能直接导致原接口不能使用，调用方需要被动配合修改。&lt;/p&gt;
+&lt;p&gt;一个比较好的可解决方法是再增加一个多参接口，这符合我们对扩展是开放的，但对修改是关闭的原则。对应老的调用业务也没有任何影响，唯一要做的可能是通知调用方，后续改使用新接口。但这样的缺点就是随着时间推移，大量废弃接口会同时存在于系统上，并且这些仅增加入参的方法必然会产生很多的重复代码，影响系统整体的健壮性和代码美观度。&lt;/p&gt;
+&lt;p&gt;与此相比，我更推荐将接口出参入参都设计成对象的方法，这样当接口入参增加时，我们只需增加入参对象属性，这样的方式对接口嵌入性最小，并且不会产生废弃接口和冗余代码。&lt;/p&gt;
+&lt;h2 id=&quot;2-srp单一职责原则&quot;&gt;&lt;a href=&quot;#2-srp单一职责原则&quot; class=&quot;headerlink&quot; title=&quot;2. srp单一职责原则&quot;&gt;&lt;/a&gt;2. srp单一职责原则&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;类的职责要单一，不能将太多的职责放在一个类中。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个原则很好理解，一个类里面尽量只包含一项业务。比如我们有一个账户类：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;interface Account&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       // 获取账户id&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       public void getId(); &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       // 将账号信息存到数据库&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       public void save2Mysql();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个接口包括两个方法，一个是查看账号id，这个方法和账户类应有业务对应，应该设定在Account类中。而save2Mysql方法的功能是持久化Account对象，和账户类应有业务不相干，应该隔离在Account类外。&lt;/p&gt;
+&lt;h2 id=&quot;3-isp接口隔离原则&quot;&gt;&lt;a href=&quot;#3-isp接口隔离原则&quot; class=&quot;headerlink&quot; title=&quot;3. isp接口隔离原则&quot;&gt;&lt;/a&gt;3. isp接口隔离原则&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;使用多个专门的接口来取代一个统一的接口。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;现实世界中，我们期待万能的东西，例如物理里的万用表，小说电影里面的万能钥匙等等。但是在软件工程领域，我们应该尽量避免一类多能。接口隔离原则和单一职责原则类似，我们设计接口时尽量隔离业务功能。记得在支付宝实习时，我见到过能够查询并修改一个业务的接口。当需求变更我们需要更新查询的业务逻辑时，修改部分的业务也不可避免地被影响了。最显而易见的后果就是，虽然仅修改了查询，但回归测试不得不把修改也包含进来。&lt;/p&gt;
+&lt;h2 id=&quot;4-lsp里式替换原则&quot;&gt;&lt;a href=&quot;#4-lsp里式替换原则&quot; class=&quot;headerlink&quot; title=&quot;4. lsp里式替换原则&quot;&gt;&lt;/a&gt;4. lsp里式替换原则&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;在软件系统中，一个可以接受基类对象的地方必然可以接受一个子类对象。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这一原则字面上有些晦涩，但其实也很好理解。主要需要注意的地方是，当我们的子类复写（override）父类的一个方法时，要注意复写函数的功能要和父类原函数的功能保持一致。比如原来的父类函数是toString，子类方法也要是类型功能，不能突变成查询数据库或是其他。也就是说在一个软件系统中，子类应该能够完全替换任何父类能够出现的地方，并且经过替换后，不会让调用父类的客户程序从行为上有任何改变。&lt;/p&gt;
+&lt;h2 id=&quot;5-dip依赖倒置原则&quot;&gt;&lt;a href=&quot;#5-dip依赖倒置原则&quot; class=&quot;headerlink&quot; title=&quot;5. dip依赖倒置原则&quot;&gt;&lt;/a&gt;5. dip依赖倒置原则&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;要针对抽象层编程，而不要针对具体类编程。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这一原则在系统架构层面上非常重要，遵循这一原则的系统更易于维护，不容易受外部系统调用接口的变更而影响。在ocp开闭原则中我们提到，我们要避免接口的变更给外部调用系统带来的不利影响。但实际情况却是，猪队友不是少数，需要配合技改的接口经常出现在我们的需求列表中。&lt;/p&gt;
+&lt;p&gt;假设我们在领域模型层的业务逻辑需要调用发送短信服务，所谓针对具体类编程就是指，因为我们已经知道接口的定义和如何使用，我们就任选地在我们的业务逻辑中直接使用短信接口调用短信服务。这样我们的业务代码中大量耦合了短信接口。但猪队友出现，短信接口出现了更改，悲剧随着而来，这时我们只能一个一个地修改这些使用了短信接口的业务逻辑代码点。这种方式地修改，出现错误的概率也非常高。&lt;/p&gt;
+&lt;p&gt;最聪明的方法是，我们假定自己不知道短信接口的具体存在和如何调用。我们在我们的系统中自己定义一个短信调用服务的client，通过client提供短信调用的入口和出口，这样只有client出现在我们的业务代码中。一旦再次出现短信接口的更改，现在只有client调用了短信服务，我们只需要修改这一部分，绝大多数业务完全不受影响。随便提一下，这样做的另一一个好处是，我们这编写代码逻辑时，应该秉承这样的原则，所以别人写的东西都不可信任，我们把短信服务封装在client中，在client中进行错误处理。这样很好地保证了我们自己的业务代码不会被短信服务的异常中断。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;a href=&quot;#OOAD的5大原则有什么用&quot; class=&quot;headerlink&quot; title=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;/a&gt;OOAD的5大原则有什么用&lt;/h2&gt;&lt;p&gt;在聊OOAD的5大原则具体是啥前，先简单介绍下OOA
+    
+    </summary>
+    
+      <category term="技术" scheme="http://yoursite.com/categories/program/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>使用Hexo构建Blog</title>
