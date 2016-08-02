@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -67,6 +67,71 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-转载-Python-脚本帮你找出微信上删除你好友的人" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/" class="article-date">
+  <time datetime="2016-08-02T08:09:19.000Z" itemprop="datePublished">2016-08-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/program/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/">转载-Python 脚本帮你找出微信上删除你好友的人</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前两天朋友圈被一篇文章《黑科技，Python 脚本帮你找出微信上删除你好友的人》刷屏了。 这篇文章说道，以为Github上的大神Ox5e利用Python写了一个脚本自动帮你测试哪些好友把你删了，并且不会打扰到对方。 这个项目在Github上短短几天时间就获取到了3000多个Star。 这是什么概念？ 如果你在Github上获得了100个Star，去腾讯应聘的话可以免掉笔试。 Python最出名的Web框架django一共有17000多个Star。 很多朋友很奇怪这是这么实现的了？ 笔者在读完他的源码后，大概了解了背后的原理。 下面就跟着笔者一起来揭秘这个背后的原理吧！ 原理就是用微信网页版的接口，新建群组,如果加不进来就是被删好友了(不要在群组里讲话,别人是看不见的) 具体的技术上的实现原理如下： </p>
+<h2 id="获取uuid"><a href="#获取uuid" class="headerlink" title="获取uuid"></a>获取uuid</h2><p>打开<a href="https://wx.qq.com/" target="_blank" rel="external">Web版微信</a>，使用chrome的审查元素，查看network请求，可以找到<code>jslogin</code>请求，如下图，这个请求返回<code>QRLogin</code>的uuid，正是生成二维码登陆的必要参数。 </p>
+<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvluv3ebuj20kr03vgmk.jpg" alt=""> <img src="http://ww2.sinaimg.cn/large/785cd1e3gw1ezvlw2forfj20n0049q3j.jpg" alt=""> </p>
+<h2 id="获取登陆二维码"><a href="#获取登陆二维码" class="headerlink" title="获取登陆二维码"></a>获取登陆二维码</h2><p>拿到uuid之后，我们直接访问带uuid的链接即可获取登陆二维码 链接如下: </p>
+<pre><code>https://login.weixin.qq.com/qrcode/Iamuwcej-Q==
+</code></pre><h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><p>当我们拿起手机扫二维码的时候，我们发现，微信web端发起一个请求</p>
+<p> <img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvlwpiw2xj20n705sdgs.jpg" alt=""> </p>
+<p>并进入等待状态，当我们手机按下确认登陆按钮是，Web端登陆成功，并返回登陆成功。</p>
+<p> <img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvlx98tcej20on03e74m.jpg" alt=""> </p>
+<p>访问redirect_uri，即可获得，登陆信息 </p>
+<p> <img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvlxumtnyj20n6080gn3.jpg" alt=""></p>
+<p> <img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvlyt98ywj21ak09awh1.jpg" alt=""></p>
+<h2 id="初始化页面"><a href="#初始化页面" class="headerlink" title="初始化页面"></a>初始化页面</h2><p>拿到上面的信息之后，需要初始化微信界面，微信是通过以下方式初始化的 </p>
+<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvlz8q3q6j20fe03ymxq.jpg" alt=""> </p>
+<p>初始化的之后，可以获得当前用户信息 </p>
+<p><img src="http://ww2.sinaimg.cn/large/785cd1e3gw1ezvlzqk2t1j20l006hgn4.jpg" alt=""> </p>
+<h2 id="获取联系人"><a href="#获取联系人" class="headerlink" title="获取联系人"></a>获取联系人</h2><p>这时候点击已经登陆的页面的查看过联系人，可以发现，会有以下请求，返回结果可以得到所有联系人（包括公众号/服务号，群聊，联系人等等），筛选出所有联系人即可。 </p>
+<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvm03s373j20r105xwf6.jpg" alt=""> </p>
+<h2 id="创建群聊"><a href="#创建群聊" class="headerlink" title="创建群聊"></a>创建群聊</h2><p>手动点击创建群聊，并选中部分好友，会有以下请求： 创建群聊 </p>
+<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvm0kjq7bj20qq078myc.jpg" alt=""> </p>
+<p>添加好友 </p>
+<p><img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvm12q4e4j20r0070abo.jpg" alt=""> </p>
+<p>通过返回状态码，即可判断是否被删除（MemberStatus=4，表示被对方删除）如下图： </p>
+<p><img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvm1hc503j20vi076gmu.jpg" alt=""> </p>
+<p>最后，要说的是，查询的结果会引起心理上的不适，请谨慎使用（刚发现十几个女生都把我删了，不说了，让我去哭一会） 参考： <https: github.com="" xiangzhai="" qwx="" blob="" master="" doc="" protocol.md="" https:="" 0x5e="" wechat-deleted-friends="" wdf.py=""></https:></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/" data-id="cird6rf4b000450pe1cdh4h9j" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Java编程最佳实践" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -680,7 +745,7 @@ public enum Os {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/Java编程最佳实践/" data-id="ciqteeecu00032fpei4y9wr9z" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/07/19/Java编程最佳实践/" data-id="cird6rf43000150pe3ybbwpup" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -737,7 +802,7 @@ public enum Os {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/19/OOAD5大原则理解/" data-id="ciqteeeco00012fpe4vilrd7p" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/07/19/OOAD5大原则理解/" data-id="cird6rf3y000050pecajlmt8x" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -810,7 +875,7 @@ public enum Os {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/15/使用Hexo构建Blog/" data-id="ciqteeecj00002fpe0zbidvas" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/07/15/使用Hexo构建Blog/" data-id="cird6rf49000350pesgwjoyms" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -827,7 +892,7 @@ public enum Os {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/program/">技术</a></li></ul>
     </div>
@@ -842,9 +907,9 @@ public enum Os {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
     </div>
   </div>
 
@@ -852,9 +917,13 @@ public enum Os {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/">转载-Python 脚本帮你找出微信上删除你好友的人</a>
+          </li>
         
           <li>
             <a href="/2016/07/19/Java编程最佳实践/">Java编程最佳实践</a>
@@ -881,7 +950,7 @@ public enum Os {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Kyler Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
