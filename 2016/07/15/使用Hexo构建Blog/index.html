@@ -15,7 +15,7 @@
 另外本文参考了Google上search的一些同类型文章，首先我觉得大家写的都很赞，对这些前辈就不">
 <meta property="og:image" content="http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/55032611.jpg">
 <meta property="og:image" content="http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/26390887.jpg">
-<meta property="og:updated_time" content="2016-07-15T10:33:41.000Z">
+<meta property="og:updated_time" content="2016-12-29T07:02:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Hexo构建Blog">
 <meta name="twitter:description" content="前言一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，于是借着这波东风赶鸭子上架，花了2h时间研究了下github快速搭建博客的方法。这里写下使用Hexo搭建Blog的主要流程作为我第一篇文章，需要的拿走不谢。
@@ -62,9 +62,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kyler.wang"></form>
@@ -107,6 +107,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要使用Hexo-amp-Github搭建Blog？"><span class="toc-number">2.</span> <span class="toc-text">为什么要使用Hexo&Github搭建Blog？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要步骤"><span class="toc-number">3.</span> <span class="toc-text">主要步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#github创建仓库"><span class="toc-number">3.1.</span> <span class="toc-text">github创建仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Node-JS"><span class="toc-number">3.2.</span> <span class="toc-text">安装Node.JS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Hexo"><span class="toc-number">3.3.</span> <span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo初始化"><span class="toc-number">3.4.</span> <span class="toc-text">Hexo初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地查看效果"><span class="toc-number">3.5.</span> <span class="toc-text">本地查看效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文章"><span class="toc-number">3.6.</span> <span class="toc-text">创建文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github-pages"><span class="toc-number">3.7.</span> <span class="toc-text">部署到github pages</span></a></li></ol></li></ol>
+          </div>
+        
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，于是借着这波东风赶鸭子上架，花了2h时间研究了下github快速搭建博客的方法。这里写下使用Hexo搭建Blog的主要流程作为我第一篇文章，需要的拿走不谢。</p>
 <p>另外本文参考了Google上search的一些同类型文章，首先我觉得大家写的都很赞，对这些前辈就不一一感谢了。但是多数文章Hexo和github结合的一些细节表达的还不是特别清楚，导致我读的时候也有些困惑，所以不才大胆对这些资料进行总结精炼，并且对Hexo部署到github page的细节更多说明。</p>
 <p>另外转载请尽量给个面子，标注个作者啥的。实在不愿意心里默默感谢下也算了。╮(╯▽╰)╭</p>
@@ -144,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kyler.wang/2016/07/15/使用Hexo构建Blog/" data-id="cixa0ak690005xwpenf1vo0l3" class="article-share-link">Partager</a>
+      <a data-url="http://kyler.wang/2016/07/15/使用Hexo构建Blog/" data-id="cixa0xx9k000542pe1vvjg92z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -154,7 +161,7 @@
 <nav id="article-nav">
   
     <a href="/2016/07/19/OOAD5大原则理解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           OOAD5大原则理解
@@ -170,7 +177,7 @@
 
 
 <section id="comments">
-  <h1 class="title">Commentaires</h1>
+  <h1 class="title">Comments</h1>
   <div id="disqus_thread">
     <!-- UY BEGIN -->
     <div id="uyan_frame"></div>
@@ -185,7 +192,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/program/">技术</a></li></ul>
     </div>
@@ -210,7 +217,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -254,7 +261,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Kyler Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

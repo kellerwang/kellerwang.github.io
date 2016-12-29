@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kyler.wang/"/>
-  <updated>2016-12-28T08:11:59.000Z</updated>
+  <updated>2016-12-29T07:02:31.000Z</updated>
   <id>http://kyler.wang/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kyler.wang/2016/12/28/sublime-markdown%E5%AE%9E%E8%B7%B5/"/>
     <id>http://kyler.wang/2016/12/28/sublime-markdown实践/</id>
     <published>2016-12-28T07:24:45.000Z</published>
-    <updated>2016-12-28T08:11:59.000Z</updated>
+    <updated>2016-12-29T07:02:31.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;from-Mou-to-sublime&quot;&gt;&lt;a href=&quot;#from-Mou-to-sublime&quot; class=&quot;headerlink&quot; title=&quot;from Mou to sublime&quot;&gt;&lt;/a&gt;from Mou to sublime&lt;/h2&gt;&lt;p&gt;markdown这种轻量级标记语言被多数科技公司作为主流文档编辑语言，使用起来也是灰常方便。笔者在mac上编写markdown语言原来主要使用&lt;a href=&quot;http://25.io/mou/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MOU&lt;/a&gt;，但是日前osX升级到10.12.2后mou突然抽风不能使用。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://7xve7o.com1.z0.glb.clouddn.com/16-12-28/54692701-file_1482910576451_14afa.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -765,7 +765,7 @@ public enum Os {
     <link href="http://kyler.wang/2016/07/15/%E4%BD%BF%E7%94%A8Hexo%E6%9E%84%E5%BB%BABlog/"/>
     <id>http://kyler.wang/2016/07/15/使用Hexo构建Blog/</id>
     <published>2016-07-15T08:35:52.000Z</published>
-    <updated>2016-07-15T10:33:41.000Z</updated>
+    <updated>2016-12-29T07:02:16.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，于是借着这波东风赶鸭子上架，花了2h时间研究了下github快速搭建博客的方法。这里写下使用Hexo搭建Blog的主要流程作为我第一篇文章，需要的拿走不谢。&lt;/p&gt;
 &lt;p&gt;另外本文参考了Google上search的一些同类型文章，首先我觉得大家写的都很赞，对这些前辈就不一一感谢了。但是多数文章Hexo和github结合的一些细节表达的还不是特别清楚，导致我读的时候也有些困惑，所以不才大胆对这些资料进行总结精炼，并且对Hexo部署到github page的细节更多说明。&lt;/p&gt;
