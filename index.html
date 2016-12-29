@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kyler.wang"></form>
@@ -102,47 +102,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
+        <h2 id="from-Mou-to-sublime"><a href="#from-Mou-to-sublime" class="headerlink" title="from Mou to sublime"></a>from Mou to sublime</h2><p>markdown这种轻量级标记语言被多数科技公司作为主流文档编辑语言，使用起来也是灰常方便。笔者在mac上编写markdown语言原来主要使用<a href="http://25.io/mou/">MOU</a>，但是日前osX升级到10.12.2后mou突然抽风不能使用。</p>
         
-        <h2 id="from-Mou-to-sublime"><a href="#from-Mou-to-sublime" class="headerlink" title="from Mou to sublime"></a>from Mou to sublime</h2><p>markdown这种轻量级标记语言被多数科技公司作为主流文档编辑语言，使用起来也是灰常方便。笔者在mac上编写markdown语言原来主要使用<a href="http://25.io/mou/" target="_blank" rel="external">MOU</a>，但是日前osX升级到10.12.2后mou突然抽风不能使用。</p>
-<p><img src="http://7xve7o.com1.z0.glb.clouddn.com/16-12-28/54692701-file_1482910576451_14afa.png" alt=""></p>
-<p>所以笔者不得不考虑新的编辑器，Google后发现sublime+markdown插件就是不错的选择。因为笔者因为穷（sublime不购买20mins会弹一次购买提示）不太经常使用sublime，所以这里写一篇入门给同样不熟悉sublime的小白，如何在sublime上安装使用markdown插件。</p>
-<h2 id="安装markdown插件"><a href="#安装markdown插件" class="headerlink" title="安装markdown插件"></a>安装markdown插件</h2><p>下载安装<a href="https://www.sublimetext.com/" target="_blank" rel="external">sublime</a>，按下Control + `，然后粘贴上下面的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import urllib.request,os; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &apos;wb&apos;).write(urllib.request.urlopen( &apos;http://sublime.wbond.net/&apos; + pf.replace(&apos; &apos;,&apos;%20&apos;)).read())</div></pre></td></tr></table></figure>
-<p>使用快捷键 ‘command + shift + p ‘ 进入到Sublime 命令面板，输入 “install package” 从列表中选择 “install Package” 然后回车。稍等片刻，sublime会显示可供安装的插件。</p>
-<p><img src="http://7xve7o.com1.z0.glb.clouddn.com/16-12-28/89038682-file_1482911496348_6a40.png" alt=""></p>
-<p>sublime上使用markdown主要需要两个插件，一个是MarkdownEditing，主要是提供markdown相关语法的显示效果；另外一个是OmniMarkupPreviewer，主要提供markdown展示导出相关功能。两者的安装方法一样，都是在 “install Package”后在输入界面输入MarkdownEditing和OmniMarkupPreviewer，然后回车，是不是很方便XD。</p>
-<h2 id="MarkdownEditing使用"><a href="#MarkdownEditing使用" class="headerlink" title="MarkdownEditing使用"></a>MarkdownEditing使用</h2><p>个人使用感觉，MarkdownEditing和OmniMarkupPreviewer联合使用效果比MOU还有爽。首先MarkdownEditing提供快捷键用于快速插入markdown标记，比较常用的如：</p>
-<ul>
-<li>command + shift + k 插入图片</li>
-</ul>
-<p>但更帅气的是MarkdownEditing增加的几个”code snippet”，比如：</p>
-<ul>
-<li>输入 “mdi + tab” 会自动插入下面的图片标记</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</div></pre></td></tr></table></figure>
-<ul>
-<li>输入 “mdl + tab” 会自动生成下面的链接标记</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[](link)</div></pre></td></tr></table></figure>
-<p>另外感觉MarkdownEditing插件更方便程序员使用，插入代码可供根据语言高亮显示，貌似MOU没有类似功能。</p>
-<p><img src="http://7xve7o.com1.z0.glb.clouddn.com/16-12-28/95453670-file_1482912298671_6333.png" alt=""></p>
-<h2 id="OmniMarkupPreviewer使用"><a href="#OmniMarkupPreviewer使用" class="headerlink" title="OmniMarkupPreviewer使用"></a>OmniMarkupPreviewer使用</h2><p>首先可以过点击菜单栏<code>Preferences - Browse Packages</code>打开其Finder窗口，其中<code>OmniMarkupPreviewer.sublime-settings</code>是其设置文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">/* OmniMarkupPreviewer default setting, DO NOT MODIFY */</div><div class="line">&#123;</div><div class="line">    &quot;server_host&quot;: &quot;127.0.0.1&quot;,</div><div class="line">    &quot;server_port&quot;: 51004,</div><div class="line">    &quot;refresh_on_modified&quot;: true,</div><div class="line">    // delay after modified, in milliseconds</div><div class="line">    &quot;refresh_on_modified_delay&quot;: 500,</div><div class="line">    &quot;refresh_on_saved&quot;: true,</div><div class="line"></div><div class="line">    // User defined command for launching preview in web browser</div><div class="line">    // For example:</div><div class="line">    //   Launching preview using Google Chrome in OS X:</div><div class="line">    //      [&quot;open&quot;, &quot;-a&quot;, &quot;Google Chrome&quot;, &quot;&#123;url&#125;&quot;]</div><div class="line">    &quot;browser_command&quot;: [],</div><div class="line"></div><div class="line">    // User public static files should be placed into</div><div class="line">    //   $&#123;packages&#125;/User/OmniMarkupPreviewer/public/</div><div class="line">    // User templates should be placed into:</div><div class="line">    //   $&#123;packages&#125;/User/OmniMarkupPreviewer/templates/</div><div class="line">    // Requires browser reload</div><div class="line">    // Built-in templates: github, github-v1</div><div class="line">    &quot;html_template_name&quot;: &quot;github&quot;,</div><div class="line"></div><div class="line">    // Polling interval for content changes in web browsers, in milliseconds</div><div class="line">    // Requires browser reload</div><div class="line">    &quot;ajax_polling_interval&quot;: 500,</div><div class="line"></div><div class="line">    // list of renderers to be ignored, case sensitive.</div><div class="line">    // Valid renderers are: &quot;CreoleRenderer&quot;, &quot;MarkdownRenderer&quot;, &quot;PodRenderer&quot;,</div><div class="line">    //     &quot;RDocRenderer&quot;, &quot;RstRenderer&quot;, &quot;TextitleRenderer&quot;</div><div class="line">    // for example, to disable Textile and Pod renderer:</div><div class="line">    //   &quot;ignored_renderers&quot;: [&quot;TextitleRenderer&quot;, &quot;PodRenderer&quot;]</div><div class="line">    &quot;ignored_renderers&quot;: [&quot;LiterateHaskellRenderer&quot;],</div><div class="line"></div><div class="line">    // Enable MathJax (http://www.mathjax.org/)</div><div class="line">    // MathJax javascript libraries will downloaded automatically, it may take some while.</div><div class="line">    // When MathJax is properly installed into OmniMarkupPreviewer/public/mathjax, you</div><div class="line">    //   have to reload your browser to get mathjax work.</div><div class="line">    // KNOWN ISSUES:</div><div class="line">    //   * It may be slow base on your computer/browser performance, so you may want to</div><div class="line">    //     tune the following options:</div><div class="line">    //         &quot;ajax_polling_interval&quot;, &quot;refresh_on_modified&quot; and &quot;refresh_on_modified_delay&quot;</div><div class="line">    &quot;mathjax_enabled&quot;: false,</div><div class="line"></div><div class="line">    // Custom options for exporting</div><div class="line">    &quot;export_options&quot; : &#123;</div><div class="line">        // follow &quot;html_template_name&quot; rules</div><div class="line">        // Built-in templates: github-export, github-v1-export</div><div class="line">        &quot;template_name&quot;: &quot;github-export&quot;,</div><div class="line">        // &quot;.&quot;:  export to the same folder as markup file.</div><div class="line">        // null: export to system temp folder.</div><div class="line">        // NOTE: folder shall exist, or it will fallback to system temp folder.</div><div class="line">        &quot;target_folder&quot;: &quot;.&quot;,</div><div class="line">        // format string for filename timestamp</div><div class="line">        &quot;timestamp_format&quot; : &quot;_%y%m%d%H%M%S&quot;,</div><div class="line">        &quot;copy_to_clipboard&quot;: false,</div><div class="line">        // Open with default browser or whatever customized in &quot;browser_command&quot;.</div><div class="line">        &quot;open_after_exporting&quot;: false</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    // MarkdownRenderer options</div><div class="line">    &quot;renderer_options-MarkdownRenderer&quot;: &#123;</div><div class="line">        // Valid extensions:</div><div class="line">        // - OFFICIAL (Python Markdown) -</div><div class="line">        //   &quot;extra&quot;: Combines [&quot;abbr&quot;, &quot;attr_list&quot;, &quot;def_list&quot;, &quot;fenced_code&quot;, &quot;footnotes&quot;, &quot;tables&quot;, &quot;smart_strong&quot;]</div><div class="line">        //            For PHP Markdown Extra(http://michelf.ca/projects/php-markdown/extra/)</div><div class="line">        //   &quot;abbr&quot;: http://packages.python.org/Markdown/extensions/abbreviations.html</div><div class="line">        //   &quot;attr_list&quot;: http://packages.python.org/Markdown/extensions/attr_list.html</div><div class="line">        //   &quot;def_list&quot;: http://packages.python.org/Markdown/extensions/definition_lists.html</div><div class="line">        //   &quot;fenced_code&quot;: http://packages.python.org/Markdown/extensions/fenced_code_blocks.html</div><div class="line">        //   &quot;footnotes&quot;: http://packages.python.org/Markdown/extensions/footnotes.html</div><div class="line">        //   &quot;tables&quot;: http://packages.python.org/Markdown/extensions/tables.html</div><div class="line">        //   &quot;smart_strong&quot;: http://packages.python.org/Markdown/extensions/smart_strong.html</div><div class="line">        //   &quot;codehilite&quot;: http://packages.python.org/Markdown/extensions/code_hilite.html</div><div class="line">        //   &quot;meta&quot;: http://packages.python.org/Markdown/extensions/meta_data.html</div><div class="line">        //   &quot;toc&quot;: http://packages.python.org/Markdown/extensions/toc.html</div><div class="line">        //   &quot;nl2br&quot;: http://packages.python.org/Markdown/extensions/nl2br.html</div><div class="line">        // - 3RD PARTY -</div><div class="line">        //   &quot;strikeout&quot;: Strikeout extension syntax - `This ~~is deleted text.~~`</div><div class="line">        //   &quot;subscript&quot;: Subscript extension syntax - `This is water: H~2~O`</div><div class="line">        //   &quot;superscript&quot;: Superscript extension syntax 0 `2^10^ = 1024`</div><div class="line">        //   &quot;smarty&quot; or &quot;smartypants&quot;: Python-Markdown extension using smartypants to emit</div><div class="line">        //                   typographically nicer (&quot;curly&quot;) quotes, proper</div><div class="line">        //                   (&quot;em&quot; and &quot;en&quot;) dashes, etc.</div><div class="line">        //                   See: http://daringfireball.net/projects/smartypants/</div><div class="line">        //                   And: https://github.com/waylan/Python-Markdown/blob/master/docs/extensions/smarty.txt</div><div class="line">        &quot;extensions&quot;: [&quot;tables&quot;, &quot;strikeout&quot;, &quot;fenced_code&quot;, &quot;codehilite&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>其中比较有用的设置包括设置默认预览浏览器（如果你默认是Safari而你想使用Chrome的话）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;browser_command&quot;: [&quot;open&quot;, &quot;-a&quot;, &quot;Google Chrome&quot;, &quot;&#123;url&#125;&quot;],</div></pre></td></tr></table></figure>
-<p>下面是OmniMarkupPreviewer几个常用快捷键:</p>
-<ul>
-<li>Command +Option +O: 在浏览器中预览</li>
-<li>Command+Option+X: 导出HTML</li>
-<li>Ctrl+Alt+C: HTML标记拷贝至剪贴板</li>
-</ul>
-<p>其预览效果要比MOU右侧预览效果好，而且打开浏览器一边编辑浏览器一边会自动更新编辑内容，是不是很赞。</p>
-
+          <p class="article-more-link">
+            <a href="/2016/12/28/sublime-markdown实践/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kyler.wang/2016/12/28/sublime-markdown实践/" data-id="cixa1atft00049qpezyonn2fn" class="article-share-link">Share</a>
+      <a data-url="http://kyler.wang/2016/12/28/sublime-markdown实践/" data-id="cixa1ipia0001f3peisgu4gy7" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -179,41 +148,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
-        
         <p>前两天朋友圈被一篇文章《黑科技，Python 脚本帮你找出微信上删除你好友的人》刷屏了。 这篇文章说道，以为Github上的大神Ox5e利用Python写了一个脚本自动帮你测试哪些好友把你删了，并且不会打扰到对方。 这个项目在Github上短短几天时间就获取到了3000多个Star。 这是什么概念？ 如果你在Github上获得了100个Star，去腾讯应聘的话可以免掉笔试。 Python最出名的Web框架django一共有17000多个Star。 很多朋友很奇怪这是这么实现的了？ 笔者在读完他的源码后，大概了解了背后的原理。 下面就跟着笔者一起来揭秘这个背后的原理吧！ 原理就是用微信网页版的接口，新建群组,如果加不进来就是被删好友了(不要在群组里讲话,别人是看不见的) 具体的技术上的实现原理如下： </p>
-<h2 id="获取uuid"><a href="#获取uuid" class="headerlink" title="获取uuid"></a>获取uuid</h2><p>打开<a href="https://wx.qq.com/" target="_blank" rel="external">Web版微信</a>，使用chrome的审查元素，查看network请求，可以找到<code>jslogin</code>请求，如下图，这个请求返回<code>QRLogin</code>的uuid，正是生成二维码登陆的必要参数。 </p>
-<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvluv3ebuj20kr03vgmk.jpg" alt=""> <img src="http://ww2.sinaimg.cn/large/785cd1e3gw1ezvlw2forfj20n0049q3j.jpg" alt=""> </p>
-<h2 id="获取登陆二维码"><a href="#获取登陆二维码" class="headerlink" title="获取登陆二维码"></a>获取登陆二维码</h2><p>拿到uuid之后，我们直接访问带uuid的链接即可获取登陆二维码 链接如下: </p>
-<pre><code>https://login.weixin.qq.com/qrcode/Iamuwcej-Q==
-</code></pre><h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><p>当我们拿起手机扫二维码的时候，我们发现，微信web端发起一个请求</p>
-<p> <img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvlwpiw2xj20n705sdgs.jpg" alt=""> </p>
-<p>并进入等待状态，当我们手机按下确认登陆按钮是，Web端登陆成功，并返回登陆成功。</p>
-<p> <img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvlx98tcej20on03e74m.jpg" alt=""> </p>
-<p>访问redirect_uri，即可获得，登陆信息 </p>
-<p> <img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvlxumtnyj20n6080gn3.jpg" alt=""></p>
-<p> <img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvlyt98ywj21ak09awh1.jpg" alt=""></p>
-<h2 id="初始化页面"><a href="#初始化页面" class="headerlink" title="初始化页面"></a>初始化页面</h2><p>拿到上面的信息之后，需要初始化微信界面，微信是通过以下方式初始化的 </p>
-<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvlz8q3q6j20fe03ymxq.jpg" alt=""> </p>
-<p>初始化的之后，可以获得当前用户信息 </p>
-<p><img src="http://ww2.sinaimg.cn/large/785cd1e3gw1ezvlzqk2t1j20l006hgn4.jpg" alt=""> </p>
-<h2 id="获取联系人"><a href="#获取联系人" class="headerlink" title="获取联系人"></a>获取联系人</h2><p>这时候点击已经登陆的页面的查看过联系人，可以发现，会有以下请求，返回结果可以得到所有联系人（包括公众号/服务号，群聊，联系人等等），筛选出所有联系人即可。 </p>
-<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvm03s373j20r105xwf6.jpg" alt=""> </p>
-<h2 id="创建群聊"><a href="#创建群聊" class="headerlink" title="创建群聊"></a>创建群聊</h2><p>手动点击创建群聊，并选中部分好友，会有以下请求： 创建群聊 </p>
-<p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvm0kjq7bj20qq078myc.jpg" alt=""> </p>
-<p>添加好友 </p>
-<p><img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvm12q4e4j20r0070abo.jpg" alt=""> </p>
-<p>通过返回状态码，即可判断是否被删除（MemberStatus=4，表示被对方删除）如下图： </p>
-<p><img src="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvm1hc503j20vi076gmu.jpg" alt=""> </p>
-<p>最后，要说的是，查询的结果会引起心理上的不适，请谨慎使用（刚发现十几个女生都把我删了，不说了，让我去哭一会）</p>
-<p>参考： </p>
-<p><a href="https://github.com/xiangzhai/qwx/blob/master/doc/protocol.md" target="_blank" rel="external">https://github.com/xiangzhai/qwx/blob/master/doc/protocol.md</a> </p>
-<p><a href="https://github.com/0x5e/wechat-deleted-friends/blob/master/wdf.py" target="_blank" rel="external">https://github.com/0x5e/wechat-deleted-friends/blob/master/wdf.py</a></p>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kyler.wang/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/" data-id="cixa1atfw00059qpe7wmrx4uk" class="article-share-link">Share</a>
+      <a data-url="http://kyler.wang/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/" data-id="cixa1ipj20005f3pe2enaig94" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -250,8 +194,6 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
-        
         <blockquote>
 <p>转自喜马拉雅军校第一期班</p>
 </blockquote>
@@ -260,585 +202,15 @@
 <li>本文重点列举Java语言和标准库上的通用优化建议，遵循这些建议可以在不改变系统框架和设计的情况下减少错误，提高效率。系统级优化需要对性能做全面的监测和分析，没有通用方法，本文涉及不多，建议阅读专业的Java性能优化相关资料。</li>
 <li>代码首先要符合规范，保证可读性，在此基础上再优化。</li>
 </ol>
-<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><h4 id="多用基本类型，少用封装类型"><a href="#多用基本类型，少用封装类型" class="headerlink" title="多用基本类型，少用封装类型"></a>多用基本类型，少用封装类型</h4><p>只在需要使用对象时使用封装类型（如表示null，用于泛型）。</p>
-<p>原因：</p>
-<pre><code>1. 封装类型比基本类型占用更多的内存空间
-2. 封装类型使用时需要判断是否为null
-3. 拆装箱有性能损失
-</code></pre><p>举例：</p>
-<pre><code>// 当getInteger为null时randomNumber可能会抛异常
-Integer getInteger(){...}
-Integer randomNumber() {
-    return random.nextBoolean() ? 1 : getInteger(); 
-}
-
-// 不断创建Integer，效率低
-Integer sum = 0;
-for (int i = 0; i &lt; Integer.MAX_VALUE; i++) {
-    sum += i;
-}
-
-// 封装类型比较时的异常行为 
-Integer i1 = 1234;
-Integer i2 = 1234;
-// false 数值比较，i1.intValue()不小于i2.intValue()
-System.out.println(i1 &lt; i2);
-// false 引用一致性比较，i1和i2是不同对象
-System.out.println(i1 == i2);
-// false 数值比较，i1.intValue()不大于i2.intValue()
-System.out.println(i1 &gt; i2);
-</code></pre><h4 id="手动装箱时使用valueOf-type-，不用new"><a href="#手动装箱时使用valueOf-type-，不用new" class="headerlink" title="手动装箱时使用valueOf([type])，不用new"></a>手动装箱时使用valueOf([type])，不用new</h4><p>原因：</p>
-<pre><code>Java标准库对整数类型的部分对象做了缓存，使用valueOf可以利用这些缓存减少内存使用量。
-例如Integer默认对-128到127之间的对象做了缓存（可以通过jvm参数提高上限）。
-</code></pre><p>举例：</p>
-<pre><code>// bad
-Integer integer2 = new Integer(123);
-
-// good，但代码中没必要这样写，编译器会自动装箱
-Integer integer1 = Integer.valueOf(123);
-</code></pre><h4 id="使用parseType-，不用valueOf-String"><a href="#使用parseType-，不用valueOf-String" class="headerlink" title="使用parseType\，不用valueOf(String)"></a>使用parse<a href="String">Type\</a>，不用valueOf(String)</h4><p>原因：</p>
-<pre><code>parse[Type](String)返回的是基本类型，valueOf(String)返回的是封装类型，所以需要基本类型时使用parse\[Type\]性能比较好；
-在需要封装类型时，使用valueOf也不会带来性能提升，因为java编译器会做自动装箱，valueOf只是将自动装箱显式化。
-</code></pre><p>举例：</p>
-<pre><code>// bad
-int i2 = Integer.valueOf(&quot;123&quot;);
-
-// good
-int i1 = Integer.parseInt(&quot;123&quot;);
-</code></pre><h4 id="不用-比较浮点数"><a href="#不用-比较浮点数" class="headerlink" title="不用==比较浮点数"></a>不用==比较浮点数</h4><p>原因：</p>
-<pre><code>float和double在计算机中不是精确存储的，直接用==比较会出现与预期结果不一样的情况。
-</code></pre><p>举例：</p>
-<pre><code>double d1 = 0.01D;
-double d2 = 0.01F;
-// false
-System.out.println(d1 == d2);
-</code></pre><p>实践：</p>
-<pre><code>//使用BigDecimal精确表示浮点数 或 设置误差范围
-boolean equals(double d1, double d2) {
-    return Math.abs(d1 - d2) &lt; 0.0001;
-}
-</code></pre><h4 id="使用BigDecimal时注意小数位数"><a href="#使用BigDecimal时注意小数位数" class="headerlink" title="使用BigDecimal时注意小数位数"></a>使用BigDecimal时注意小数位数</h4><p>原因：</p>
-<pre><code>小数位是BigDecimal的组成部分，小数位会影响BigDecimal比较结果。
-</code></pre><p>举例：</p>
-<pre><code>BigDecimal decimal1 = new BigDecimal(&quot;0.01&quot;);
-BigDecimal decimal2 = new BigDecimal(&quot;0.010&quot;);
-// false
-System.out.println(decimal1.equals(decimal2));
-// true
-System.out.println(decimal1.equals(decimal2.setScale(2)));
-</code></pre><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h4 id="不要重复创建String对象"><a href="#不要重复创建String对象" class="headerlink" title="不要重复创建String对象"></a>不要重复创建String对象</h4><p>使用双引号（””）包围的字符串本身就是一个String对象，由于String是不可变的，所以可以直接使用，不要再用new String去创建新对象。</p>
-<p>举例：</p>
-<pre><code>// bad
-String s = new String(&quot;abc&quot;);
-// good
-String s = &quot;abc&quot;;
-</code></pre><h4 id="使用StringBuilder连接字符串"><a href="#使用StringBuilder连接字符串" class="headerlink" title="使用StringBuilder连接字符串"></a>使用StringBuilder连接字符串</h4><p>原因：</p>
-<pre><code>使用+连接字符串时每使用一次+会重新构造一个String（简单情况下可能会优化为使用StringBuilder），
-涉及多次数组复制，效率很低，StringBuilder使用动态增长的数组存储字符，效率高。
-</code></pre><p>举例：</p>
-<pre><code>// bad
-String join(List&lt;String&gt; list) {
-    String joined = &quot;&quot;;
-    for (String s : list) {
-        joined += s;
-    }
-    return joined;
-}
-
-// good
-String join(List&lt;String&gt; list) {
-    StringBuilder joinedBuilder = new StringBuilder();
-    for (String s : list) {
-        joinedBuilder.append(s);
-    }
-    return joinedBuilder.toString();
-}
-</code></pre><h4 id="使用StringBuilder时，如果可能，指定容量"><a href="#使用StringBuilder时，如果可能，指定容量" class="headerlink" title="使用StringBuilder时，如果可能，指定容量"></a>使用StringBuilder时，如果可能，指定容量</h4><p>原因：</p>
-<pre><code>如果不指定容量，StringBuilder容量动态增加，涉及到创建临时数组和数组复制，影响性能。
-</code></pre><p>举例：</p>
-<pre><code>String repeat(String string, int count) {
-    StringBuilder buffer = new StringBuilder(string.length() * count);
-    for(int i = 0; i &lt; count; i++) {
-        buffer.append(string);
-    }
-    return buffer.toString();
-}
-</code></pre><h4 id="不要用String代替其他类型"><a href="#不要用String代替其他类型" class="headerlink" title="不要用String代替其他类型"></a>不要用String代替其他类型</h4><p>从IO或者远程调用得到String后，如果可能，应先转为合适的类型再做后续处理；在程序内部，除了日志、前后端交互等必须使用String的场景外，应避免将其他类型对象转为String后再做处理。</p>
-<p>原因：</p>
-<pre><code>1. String更占空间
-2. String丢失了数据的原始类型，难做类型校验
-3. 对String的处理通常比原数据类型的处理效率更低
-</code></pre><p>举例：</p>
-<pre><code>// bad，效率低，费空间
-class SimpleCache1 {
-    private Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-
-    public void put(long id1, long id2, String value) {
-        map.put(id1 + &quot;&amp;&quot; + id2, value);
-    }
-
-    public String get(long id1, long id2) {
-        return map.get(id1 + &quot;&amp;&quot; + id2);
-    }
-}
-
-// good，效率高，省空间
-class SimpleCache2 {
-    static class Ids {
-        private long id1;
-        private long id2;
-
-        public Ids(long id1, long id2) {
-            this.id1 = id1;
-            this.id2 = id2;
-        }
-
-        @Override
-        public int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + (int) (id1 ^ (id1 &gt;&gt;&gt; 32));
-            result = prime * result + (int) (id2 ^ (id2 &gt;&gt;&gt; 32));
-            return result;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (!(obj instanceof Ids)) {
-                return false;
-            }
-            Ids other = (Ids) obj;
-            if (id1 != other.id1) {
-                return false;
-            }
-            if (id2 != other.id2) {
-                return false;
-            }
-            return true;
-        }
-    }
-
-    private Map&lt;Ids, String&gt; map = new HashMap&lt;Ids, String&gt;();
-
-    public void put(long id1, long id2, String value) {
-        map.put(new Ids(id1, id2), value);
-    }
-
-    public String get(long id1, long id2) {
-        return map.get(new Ids(id1, id2));
-    }
-}
-</code></pre><h4 id="使用预编译的正则表达式"><a href="#使用预编译的正则表达式" class="headerlink" title="使用预编译的正则表达式"></a>使用预编译的正则表达式</h4><p>原因：</p>
-<pre><code>复杂正则表达式的编译比较耗时
-</code></pre><p>举例：</p>
-<pre><code>// bad，每次调用string.replaceAll都会创建Pattern
-List&lt;String&gt; replaceAll1(List&lt;String&gt; strings, String regex, String  replacement) {
-    List&lt;String&gt; replaced = new ArrayList&lt;String&gt;(strings.size());
-    for (String string : strings) {
-        replaced.add(string.replaceAll(regex, replacement));
-    }
-    return replaced;
-}
-
-// good
-List&lt;String&gt; replaceAll2(List&lt;String&gt; strings, String regex, String replacement) {
-    List&lt;String&gt; replaced = new ArrayList&lt;String&gt;(strings.size());
-    Pattern pattern = Pattern.compile(regex);
-    for (String string : strings) {
-        Matcher matcher = pattern.matcher(string);
-        replaced.add(matcher.replaceAll(replacement));
-    }
-    return replaced;
-}
-</code></pre><h4 id="慎用String-intern"><a href="#慎用String-intern" class="headerlink" title="慎用String.intern()"></a>慎用String.intern()</h4><p>String.intern()对两个a.equals(b)的String返回相同的引用，看起来能节省空间，但要慎用，尤其是在java6中。</p>
-<p>原因：</p>
-<pre><code>1. java6中intern字符串池是创建在PermGen上的，PermGen通常设置的比较小，且运行时不可扩展，
-   String.intern()容易引起PermGen内存溢出
-2. java7和8中intern字符串池是创建在heap上的，但大小是固定的，可以通过jvm参数-XX:StringTableSize修改，
-   修改时需要注意选择合适的大小，否则性能会严重退化，建议设置成接近字符串数两倍的一个素数
-</code></pre><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h4 id="返回值类型为集合时不要返回null，返回空集合"><a href="#返回值类型为集合时不要返回null，返回空集合" class="headerlink" title="返回值类型为集合时不要返回null，返回空集合"></a>返回值类型为集合时不要返回null，返回空集合</h4><p>原因：</p>
-<pre><code>空集合和非空集合使用方法一致，null需要做特判，增加代码复杂度。
-</code></pre><h4 id="使用Collections创建小集合"><a href="#使用Collections创建小集合" class="headerlink" title="使用Collections创建小集合"></a>使用Collections创建小集合</h4><p>原因：</p>
-<pre><code>Collections中提供了创建不可变空集合（emptyXxx）和单元素集合（singletonXxx）的工厂方法，使用这些方法创建的小集合省空间，效率高。
-</code></pre><p>举例：</p>
-<pre><code>List&lt;String&gt; splitToList(String input, String separator) {
-    if (input == null) {
-        return Collections.emptyList();
-    }
-    ...
-}
-</code></pre><h4 id="使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）"><a href="#使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）" class="headerlink" title="使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）"></a>使用ArrayList等在创建时可指定容量的集合时，如果可能，在创建时指定容量（capacity）</h4><p>原因：</p>
-<pre><code>这类集合通常使用数组保存数据，如果数组填满，会创建一个新数组，将数据复制到新数组中，然后利用新数组存储数据，数组增长过程既费时又费空间。
-</code></pre><p>举例：</p>
-<pre><code>List&lt;String&gt; joinKeyValue(Map&lt;String, String&gt; map) {
-    List&lt;String&gt; result = new ArrayList(map.size());
-    ...
-}
-</code></pre><h4 id="默认使用ArrayList，有特殊需求时使用LinkedList"><a href="#默认使用ArrayList，有特殊需求时使用LinkedList" class="headerlink" title="默认使用ArrayList，有特殊需求时使用LinkedList"></a>默认使用ArrayList，有特殊需求时使用LinkedList</h4><p>当只使用List接口定义的方法时，使用ArrayList，在有以下需求时使用LinkedList：</p>
-<pre><code>1. 使用Deque接口定义的方法
-2. 在List中间频繁执行add或remove操作，这时应使用Iterator或ListIterator顺序访问，不要使用List.add(int,T)和List.remove(int)
-</code></pre><p>原因：</p>
-<pre><code>1. LinkedList比ArrayList更占空间，LinkedList使用Node存储数据，Node中有previous、next引用，都需要占用额外空间
-2. ArrayList随机访问速度比LinkedList快
-3. LinkedList顺序访问过程中进行add或remove时只需改变部分引用，效率较高
-</code></pre><h4 id="使用EnumMap和EnumSet存储enum"><a href="#使用EnumMap和EnumSet存储enum" class="headerlink" title="使用EnumMap和EnumSet存储enum"></a>使用EnumMap和EnumSet存储enum</h4><p>原因：</p>
-<pre><code>1. EnumMap使用简单的数组存储value，省空间，效率高
-2. EnumSet使用位域存储数据，省空间，效率高
-</code></pre><h4 id="去掉不必要的Map-containsKey和Set-contains调用"><a href="#去掉不必要的Map-containsKey和Set-contains调用" class="headerlink" title="去掉不必要的Map.containsKey和Set.contains调用"></a>去掉不必要的Map.containsKey和Set.contains调用</h4><p>有些组合操作可以避免使用Map.containsKey和Set.contains，提高效率<br>举例：</p>
-<pre><code>Map&lt;K, V&gt; map = new HashMap&lt;K, V&gt;();
-// bad，不必要的containsKey
-if (map.containsKey(key)) {
-    System.out.println(map.get(key).size());
-}
-// good
-V value = map.get(key);
-if (value != null) {
-    System.out.println(value.size());
-}
-
-Map&lt;K, List&lt;V&gt;&gt; listMap = new HashMap&lt;K, List&lt;V&gt;&gt;();
-// bad，不必要的containsKey
-if (!listMap.containsKey(k)) {
-    listMap.put(k, new ArrayList&lt;V&gt;());
-}
-listMap.get(k).add(v);
-// good
-List&lt;V&gt; list = listMap.get(k);
-if (list == null) {
-    list = new ArrayList();
-    listMap.put(k, list);
-}
-list.add(v);
-
-Set&lt;V&gt; set = new HashSet&lt;V&gt;();
-// bad，不必要的contains
-if (!set.contains(value)) {
-    set.add(value);
-    // do something
-}
-// good
-if (set.add(value)){
-    // do something
-}
-</code></pre><h4 id="Key插入Hash集合后确保hashCode的值不变"><a href="#Key插入Hash集合后确保hashCode的值不变" class="headerlink" title="Key插入Hash集合后确保hashCode的值不变"></a>Key插入Hash集合后确保hashCode的值不变</h4><p>原因：</p>
-<pre><code>改变hashCode值后可能会找不到原来插入的值。
-</code></pre><h4 id="默认使用Hash-Map-Set"><a href="#默认使用Hash-Map-Set" class="headerlink" title="默认使用Hash[ Map,Set ]"></a>默认使用Hash[ Map,Set ]</h4><p>在没有其他需求时默认使用Hash[ Map,Set ]，需要有序时使用TreeMap，需要按插入顺序有序时使用LinkedHashMap，需要并发时使用ConcurrentHashMap。<br>原因：</p>
-<pre><code>基于Hash的实现在大部分情况下性能都比较好。
-</code></pre><h4 id="不要在for-中修改集合"><a href="#不要在for-中修改集合" class="headerlink" title="不要在for( : )中修改集合"></a>不要在for( : )中修改集合</h4><p>原因：</p>
-<pre><code>会对集合创建多个Iterator，导致抛ConcurrentModificationException
-</code></pre><p>举例：</p>
-<pre><code>// bad
-for (int i : list) {
-    if (i % 10 == 0) {
-        list.remove(i);
-    }
-}
-// good
-for (Iterator&lt;Integer&gt; iterator = list.iterator(); iterator.hasNext();) {
-    int i = iterator.next();
-    if (i % 10 == 0) {
-        iterator.remove();
-    }
-}
-</code></pre><h4 id="考虑使用BitSet"><a href="#考虑使用BitSet" class="headerlink" title="考虑使用BitSet"></a>考虑使用BitSet</h4><p>当需要使用Set&lt;[Integer,Short,Byte,Char]&gt;并且数据集中在较小范围内时，可以使用BitSet代替。<br>原因：</p>
-<pre><code>1. BitSet使用位域实现存储，省空间
-2. BitSet使用位操作实现功能，效率高
-</code></pre><p>举例：</p>
-<pre><code>// 简单的分段BitSet，存储分段密集的数字时节省空间
-class SimpleIntSet {
-    private static final int VALUE_BITS = 10;
-    private static final int VALUE_MASK = (1 &lt;&lt; VALUE_BITS) - 1;
-    private Map&lt;Integer, BitSet&gt; bitSetMap = new HashMap&lt;Integer, BitSet&gt;();
-
-    public void add(int value) {
-        int key = getKey(value);
-        BitSet set = bitSetMap.get(key);
-        if (set == null) {
-            set = new BitSet(VALUE_MASK + 1);
-            bitSetMap.put(key, set);
-        }
-        set.set(getBitIndex(value));
-    }
-
-    public void remove(int value) {
-        BitSet set = bitSetMap.get(getKey(value));
-        if (set != null) {
-            set.clear(getBitIndex(value));
-        }
-    }
-
-    public boolean contains(int value) {
-        BitSet set = bitSetMap.get(getKey(value));
-        return set == null || set.get(getBitIndex(value));
-    }
-
-    private int getBitIndex(int value) {
-        return value &amp; VALUE_MASK;
-    }
-
-    private int getKey(int value) {
-        return value &gt;&gt; VALUE_BITS;
-    }
-
-}
-</code></pre><h4 id="谨慎使用数组的equals和hashCode"><a href="#谨慎使用数组的equals和hashCode" class="headerlink" title="谨慎使用数组的equals和hashCode"></a>谨慎使用数组的equals和hashCode</h4><p>数组的equals和hashCode是Object中的默认实现，大部分情况下都不满足需求。需要使用equals和hashCode时，可以使用Buffer封装（基本类型数组），利用Arrays中提供的静态方法，使用Arrays.asList封装为List。</p>
-<h4 id="使用Arrays操作数组"><a href="#使用Arrays操作数组" class="headerlink" title="使用Arrays操作数组"></a>使用Arrays操作数组</h4><p>Java数组本身提供的方法很少，Arrays中提供了toString、equals、hashCode、copy操作数组的静态方法，可以利用这些方法方便地使用数组。<br>举例：</p>
-<pre><code>// copyOfRange
-int[] shiftLeft(int[] original, int shiftLength) {
-    int from = Math.min(original.length, shiftLength);
-    int to = from + original.length;
-    return Arrays.copyOfRange(original, from, to);
-}
-// deepToString
-int[][][] threeDArray = new int[][][]{{{1,2,3},{4}},{{5},{6,7}}};
-System.out.println(Arrays.deepToString(threeDArray));
-</code></pre><h4 id="使用第三方库提升效率"><a href="#使用第三方库提升效率" class="headerlink" title="使用第三方库提升效率"></a>使用第三方库提升效率</h4><p>在Java标准库中提供的集合在空间和时间复杂度上不能满足需求时，可以尝试trove等第三方库。<br>原因：</p>
-<pre><code>1. Java标准集合都是使用范型实现的，当存储数据为基本类型时需要封装，有额外的空间和性能消耗
-2. Java标准库中常用的Set（HashSet，TreeSet，LinkedHashSet）是封装Map实现的，Map中value所占的空间被浪费了
-</code></pre><h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><h4 id="Lazy-initialization"><a href="#Lazy-initialization" class="headerlink" title="Lazy initialization"></a>Lazy initialization</h4><p>Java中常用的Lazy initialization方式如下：</p>
-<pre><code>//使用静态辅助类
-class SomeClass {
-    private static class InstanceHolder {
-        static SomeClass instance = new SomeClass();
-    }
-
-    public static SomeClass getInstance() {
-        return InstanceHolder.instance;
-    }
-}
-
-//使用volatile的double check
-class SomeFactory {
-    // 注意必须有volatile
-    private volatile SomeClass someObject;
-
-    public SomeClass getSomeObject() {
-        if (someObject == null) {
-            synchronized (this) {
-                if (someObject == null) {
-                    someObject = new SomeClass();
-                }
-            }
-        }
-        return someObject;
-    }
-}
-
-// 使用final的double check
-class FinalWrapper&lt;T&gt; {
-    // 注意必须有final
-    private final T value;
-
-    FinalWrapper(T value) {
-        this.value = value;
-    }
-
-    T getValue() {
-        return value;
-    }
-}
-
-class SomeFactory {
-    private FinalWrapper&lt;SomeClass&gt; finalWrapper;
-
-    public SomeClass getSomeObject() {
-        if (finalWrapper == null) {
-            synchronized (this) {
-                if (finalWrapper == null) {
-                    finalWrapper = new FinalWrapper&lt;SomeClass&gt;(new SomeClass());
-                }
-            }
-        }
-        return finalWrapper.getValue();
-    }
-}
-</code></pre><p>####优先使用ConcurrentMap<br>需要并发Map时优先使用ConcurrentMap，包括无序的ConcurrentHashMap和有序的ConcurrentSkipListMap。</p>
-<p>原因：</p>
-<pre><code>1. ConcurrentMap内部使用锁分段等并发优化技术实现，在高并发情况下比简单的使用锁封装map以及使用Collections.synchronizedMap效率高
-2. ConcurrentMap有compare and set方式的putIfAbsent、remove、replace原子操作，可以简化并发程序实现方式
-</code></pre><p>举例：</p>
-<pre><code>// “如果map中有key，返回value；如果没有，新建一个value，放入map中，然后返回”功能的安全高效实现
-Value createIfAbsent(ConcurrentMap&lt;Key, Value&gt; map, Key key) {
-    Value value = map.get(key);
-    if (value != null) {
-        return value;
-    }
-    value = new Value();
-    Value oldValue = map.putIfAbsent(key, value);
-    if (oldValue != null) {
-        return oldValue;
-    } else {
-        return value;
-    }
-}
-</code></pre><p>####考虑使用CopyOnWrite集合<br>当集合的读远多于写时可以考虑使用CopyOnWrite集合，java标准库中提供了CopyOnWriteArrayList和CopyOnWriteArraySet。<br>原因：</p>
-<pre><code>CopyOnWrite集合的读操作未加锁，效率高
-</code></pre><h4 id="优先使用线程池（Executor）"><a href="#优先使用线程池（Executor）" class="headerlink" title="优先使用线程池（Executor）"></a>优先使用线程池（Executor）</h4><p>在创建线程时优先考虑使用线程池，而不是直接创建Thread。<br>原因：</p>
-<pre><code>1. 使用线程池便于控制线程数
-2. 使用线程池便于对任务进行统一管理
-3. 使用线程池可以复用线程，减少创建、销毁线程的开支
-4. 利用Future可以方便地进行异步调用和超时控制
-</code></pre><p>注意在使用线程池时ThreadLocal等属于线程的资源也会被复用。</p>
-<p>####优先使用Atomic[Type]<br>java.util.concurrent.atomic提供了部分基本类型及其数组的Atomic封装，在并发环境下应当优先使用。<br>原因：</p>
-<pre><code>1. Atomic使用volatile语义及底层compareAndSet实现，高并发情况下效率比直接用锁高
-2. 提供了原子的[update]AndGet以及getAnd[Update]方法，效率高，使用方便
-</code></pre><p>####选择合适的锁<br>默认使用synchronized，需要更多控制时使用ReentrantLock，读多于写时考虑使用ReentrantReadWriteLock。<br>原因：</p>
-<pre><code>1. synchronized用法最简单，不容易出错
-2. ReentrantLock比synchronized功能更多（处理中断，tryLock，多个condition...）
-3. ReentrantReadWriteLock读写锁分离，可并发读
-</code></pre><p>##IO</p>
-<p>####指定编码<br>涉及流（stream、byte）和字符（char、String）转换的地方一定要指定编码。<br>原因：</p>
-<pre><code>如果不指定编码，程序会使用默认编码，默认编码在开发机、测试机、线上环境可能不一样，引发难以测试和复现的问题
-</code></pre><p>举例：</p>
-<pre><code>byte[] bytes = ...
-// bad
-String s = new String(bytes);
-// good
-String s = new String(bytes, Charset.forName(&quot;utf-8&quot;));
-
-// bad，不要用FileReader，因为无法指定编码
-BufferedReader reader = new BufferedReader(new FileReader(&quot;/home/work/somefile&quot;));
-// good
-BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(&quot;/home/work/somefile&quot;), Charset.forName(&quot;utf-8&quot;)));
-</code></pre><p>####合理使用ByteArrayOutputStream<br>ByteArrayOutputStream有以下缺点，使用时需要注意：</p>
-<pre><code>1. write方法是synchronized方法，影响性能
-2. toByteArray会复制一个新的byte数组，影响性能，占用空间
-</code></pre><p>在使用时可以采取如下方法：</p>
-<pre><code>1. 如果byte数组长度已知，不要使用ByteArrayOutputStream，使用ByteBuffer
-2. 如果byte数组需要输出到一个stream，使用ByteArrayOutputStream.writeTo(OutputStream stream)
-3. 如果byte数组需要转成字符串，使用ByteArrayOutputStream.toString(String charsetName)
-</code></pre><h4 id="及时关闭IO资源"><a href="#及时关闭IO资源" class="headerlink" title="及时关闭IO资源"></a>及时关闭IO资源</h4><p>使用完IO资源后应该尽快关闭，否则会引起资源泄漏，资源关闭需要在finally里面进行，有些资源关闭时会抛IOException，在不关注这个异常时推荐使用org.apache.commons.io.IOUtils.closeQuietly方法。</p>
-<h4 id="不要一次把大文件的所有内容都读入内存"><a href="#不要一次把大文件的所有内容都读入内存" class="headerlink" title="不要一次把大文件的所有内容都读入内存"></a>不要一次把大文件的所有内容都读入内存</h4><p>这样容易引起OOM，应当分块读入文件，边读边处理。</p>
-<pre><code>File file = new File(&quot;somefile&quot;);
-try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file))) {
-    // bad
-    byte[] bytes = new byte[(int) file.length()];
-    stream.read(bytes);
-    // Do something
-}
-
-try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file))) {
-    // good
-    byte[] bytes = new byte[10240];
-    int readCount = 0;
-    while ((readCount = stream.read(bytes)) != -1) {
-        // Do something
-    }
-}
-</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h4 id="内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间"><a href="#内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间" class="headerlink" title="内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间"></a>内存空间紧张的情况下，考虑long类型的毫秒数代替Date对象节省空间</h4><p>原因：</p>
-<pre><code>Date只是对毫秒数的简单封装，没有必要创建Date对象再获得毫秒数。
-</code></pre><h4 id="避免并发使用java-text-SimpleDateFormat"><a href="#避免并发使用java-text-SimpleDateFormat" class="headerlink" title="避免并发使用java.text.SimpleDateFormat"></a>避免并发使用java.text.SimpleDateFormat</h4><p>原因：</p>
-<pre><code>SimpleDateFormat不是线程安全的，建议使用apache commons-lang的FastDateFormat等第三方库。
-</code></pre><h4 id="使用不可变对象"><a href="#使用不可变对象" class="headerlink" title="使用不可变对象"></a>使用不可变对象</h4><p>不可变对象有以下优点：</p>
-<pre><code>1. 线程安全
-2. 可以缓存
-3. 可以缓存hashCode等计算结果
-</code></pre><h4 id="不要使用异常代替正常执行流程"><a href="#不要使用异常代替正常执行流程" class="headerlink" title="不要使用异常代替正常执行流程"></a>不要使用异常代替正常执行流程</h4><p>原因：</p>
-<pre><code>Java中创建异常需要填充stackTrace，代价非常高，异常应当只用于表示在正常流程之外且很少发生的情况
-</code></pre><h4 id="多用final"><a href="#多用final" class="headerlink" title="多用final"></a>多用final</h4><p>原因：</p>
-<pre><code>1. jvm更容易对final域及final方法进行优化，提高运行时效率
-2. 编译器可以利用final及时提示代码错误
-3. 正确初始化的final域在并发环境下可以保证安全发布
-</code></pre><h4 id="不要在生产环境使用System-out-print-ln-写日志"><a href="#不要在生产环境使用System-out-print-ln-写日志" class="headerlink" title="不要在生产环境使用System.out.print[ln]写日志"></a>不要在生产环境使用System.out.print[ln]写日志</h4><p>原因：</p>
-<pre><code>1. System.out.print[ln]默认输出到控制台，难管理
-2. System.out.print[ln]不支持日志分级
-3. System.out.print[ln]默认遇到&apos;\n&apos;就会flush，效率较低
-</code></pre><h4 id="打日志时不要急于将对象转为String"><a href="#打日志时不要急于将对象转为String" class="headerlink" title="打日志时不要急于将对象转为String"></a>打日志时不要急于将对象转为String</h4><p>原因：</p>
-<pre><code>日志是有级别的，打印级别低于系统设置级别的日志不会被输出，这些日志提前转为String浪费资源
-</code></pre><p>举例：</p>
-<pre><code>// slf4j bad
-logger.debug(someLogObject.toString());
-logger.debug(&quot;Log object1: &quot; + someLogObject1 + &quot;, object2: &quot; + someLogObject2);
-// slf4j good
-logger.debug(&quot;{}&quot;, someLogObject);
-logger.debug(&quot;Log object1: {}, object2: {}&quot;, someLogObject1, someLogObject2);
-
-// log4j bad
-logger.debug(someLogObject.toString());
-logger.debug(&quot;Log object1: &quot; + someLogObject1 + &quot;, object2: &quot; + someLogObject2);
-// log4j good
-logger.debug(someLogObject);
-if (logger.isDebugEnabled()) {
-    logger.debug(new StringBuilder(&quot;Log object1: &quot;)
-            .append(someLogObject1)
-            .append(&quot;, object2: &quot;)
-            .append(someLogObject2));
-}
-</code></pre><p>从上面的代码可以看出，实现相同的功能log4j比slf4j需要多一次判断，不够简洁，所以不建议直接使用log4j，使用slf4j封装或者使用其他有占位符的日志框架，比如logback。</p>
-<h4 id="选择性使用"><a href="#选择性使用" class="headerlink" title="选择性使用=="></a>选择性使用==</h4><p>对基本类型使用==时，比较的是数据是否完全一致，对引用类型使用==时，比较的是引用地址是否一致，以下情况可以安全地使用==比较是否相等：</p>
-<pre><code>1. 整数基本类型
-2. 枚举类型
-</code></pre><p>其他情况下，==比较的是两者是否为同一对象。java.util.IdentityHashMap是仅使用==比较key是否相等的HashMap，在有些场景下可以用来提高效率。</p>
-<h4 id="优先使用static成员类"><a href="#优先使用static成员类" class="headerlink" title="优先使用static成员类"></a>优先使用static成员类</h4><p>static成员类与非static成员类的区别是非static成员类包含一个外部类的指针，可以访问外部类的非静态资源。当需要使用成员类时，默认使用static成员类，除非需要访问外部类的非静态资源。<br>原因：</p>
-<pre><code>1. 非static内部类占用额外空间存储外部类的引用
-2. 非static内部类影响外部类对象的内存回收，可能会引起内存泄漏
-</code></pre><h4 id="及时释放对象引用"><a href="#及时释放对象引用" class="headerlink" title="及时释放对象引用"></a>及时释放对象引用</h4><p>及时释放对象引用可以让jvm及时释放内存空间，忘记释放对象引用可能会引起内存泄漏。<br>举例：</p>
-<pre><code>class SimpleStack {
-    private Object[] array = new Object[10];
-    private int index = 0;
-
-    public void push(Object value) {
-        if (index == array.length) {
-            array = Arrays.copyOf(array, array.length * 2);
-        }
-        array[index++] = value;
-    }
-
-    public Object pop() {
-        // 这里内存泄漏，需要在返回前将array[index]置为null
-        return array[--index];
-    }
-}
-</code></pre><h2 id="使用enum"><a href="#使用enum" class="headerlink" title="使用enum"></a>使用enum</h2><p>使用enum替代常量。<br>原因：</p>
-<pre><code>1. enum是类型安全的
-2. enum可以定义方法，功能强大
-3. enum可以使用==进行比较，使用EnumHashMap等工具，效率高
-</code></pre><p>举例：</p>
-<pre><code>public class Constants{
-    public static final String OS_ANDROID = &quot;Android&quot;;
-    public static final String OS_IOS = &quot;iOS&quot;;
-}
-
-public enum Os {
-    ANDROID(&quot;Android&quot;),
-    IOS(&quot;iOS&quot;);
-
-    private String osName;
-
-    private Os(String osName) {
-        this.osName = osName;
-    }
-
-    public String getOsName() {
-        return this.osName;
-    }
-}
-</code></pre><h4 id="慎用enum的ordinal"><a href="#慎用enum的ordinal" class="headerlink" title="慎用enum的ordinal"></a>慎用enum的ordinal</h4><p>在程序中要慎用enum的ordinal，尤其在需要持久化的场景，需要使用数字表达时可以用自定义值代替。<br>原因：</p>
-<pre><code>1. 调整常量顺序或者删除常量时ordinal会发生变化
-2. ordinal只与常量顺序有关，无法定义有意义的值
-</code></pre><h4 id="少用反射"><a href="#少用反射" class="headerlink" title="少用反射"></a>少用反射</h4><p>原因：</p>
-<pre><code>1. 反射无法进行编译检查，降低了提早发现问题的可能性，无法方便地发现调用点，增加重构难度
-2. 损失性能，反射比正常方法调用要慢
-3. 反射代码不如直接调用简洁
-</code></pre><h4 id="轮子优先级"><a href="#轮子优先级" class="headerlink" title="轮子优先级"></a>轮子优先级</h4><pre><code>1. 标准库
-2. 第三方库
-3. 自己造
-</code></pre><h2 id="推荐的第三方库"><a href="#推荐的第三方库" class="headerlink" title="推荐的第三方库"></a>推荐的第三方库</h2><pre><code>1. apache-commons，java.lang的补充，提供了很多辅助工具
-2. apache-collections，java集合的补充，提供了很多集合操作工具和新的集合
-3. guava，提供了很多集合、并发、缓存等方面的工具
-</code></pre><h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><pre><code>1. Effective Java (Second Edition)
-2. Java Concurrency in Practice
-</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/19/Java编程最佳实践/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kyler.wang/2016/07/19/Java编程最佳实践/" data-id="cixa1atfl00019qpe3fvijwip" class="article-share-link">Share</a>
+      <a data-url="http://kyler.wang/2016/07/19/Java编程最佳实践/" data-id="cixa1ipi00000f3pek89ruec0" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -875,30 +247,16 @@ public enum Os {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
-        
         <h2 id="OOAD的5大原则有什么用"><a href="#OOAD的5大原则有什么用" class="headerlink" title="OOAD的5大原则有什么用?"></a>OOAD的5大原则有什么用?</h2><p>在聊OOAD的5大原则具体是啥前，先简单介绍下OOAD这些原则有什么用。OOAD出现在上世纪80年代，起因是航天事业的发展第一次出现超10w代码行的软件项目。面对超10w代码行的项目，如果继续采取基于过程的设计形式，开发者很难互相理解并协助。这时出现的面向对象程序设计能够更好地切分项目模块，开发者也方便理解项目代码逻辑，接口更让让协作简化。而本文介绍的这5个原则是OOAD存在和实现的基础，践行这些标准可以最大程度地软件设计质量。这些原则都出自一个出发点，即<code>高内聚&amp;低耦合</code>。那下面我们就来具体介绍这所谓的OOAD5大原则。</p>
-<h2 id="1-ocp开闭原则"><a href="#1-ocp开闭原则" class="headerlink" title="1. ocp开闭原则"></a>1. ocp开闭原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">软件实体对扩展是开放的，但对修改是关闭的，即在不修改一个软件实体的基础上去扩展其功能。</div></pre></td></tr></table></figure>
-<p>这个原则明显是建立在基于接口编程的基础上，在基于接口的编程场景下，接口会在第一时间被建立起来，而业务相关方都会根据这个定义好的接口来开展业务（调用或实现）。而在后续业务不断发展的过程中，接口的实现可能会根据需要进行迭代修改，但是调用方肯定不希望接口的定义改变，这样就需要不断修改调用点。从面向对象的角度上来说，调用方并不关心接口的实现，所以应该尽量采取可扩展的方式定义接口，避免后续因为业务扩展导致接口定义的变化。举个例子，接口设计时会定义入参出参，但有时随着业务的变化我们需要增加更多入参。这是如果我们直接显示地改变原方法入参的个数，可能直接导致原接口不能使用，调用方需要被动配合修改。</p>
-<p>一个比较好的可解决方法是再增加一个多参接口，这符合我们对扩展是开放的，但对修改是关闭的原则。对应老的调用业务也没有任何影响，唯一要做的可能是通知调用方，后续改使用新接口。但这样的缺点就是随着时间推移，大量废弃接口会同时存在于系统上，并且这些仅增加入参的方法必然会产生很多的重复代码，影响系统整体的健壮性和代码美观度。</p>
-<p>与此相比，我更推荐将接口出参入参都设计成对象的方法，这样当接口入参增加时，我们只需增加入参对象属性，这样的方式对接口嵌入性最小，并且不会产生废弃接口和冗余代码。</p>
-<h2 id="2-srp单一职责原则"><a href="#2-srp单一职责原则" class="headerlink" title="2. srp单一职责原则"></a>2. srp单一职责原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">类的职责要单一，不能将太多的职责放在一个类中。</div></pre></td></tr></table></figure>
-<p>这个原则很好理解，一个类里面尽量只包含一项业务。比如我们有一个账户类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">interface Account&#123;</div><div class="line">       // 获取账户id</div><div class="line">       public void getId(); </div><div class="line">       // 将账号信息存到数据库</div><div class="line">       public void save2Mysql();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>这个接口包括两个方法，一个是查看账号id，这个方法和账户类应有业务对应，应该设定在Account类中。而save2Mysql方法的功能是持久化Account对象，和账户类应有业务不相干，应该隔离在Account类外。</p>
-<h2 id="3-isp接口隔离原则"><a href="#3-isp接口隔离原则" class="headerlink" title="3. isp接口隔离原则"></a>3. isp接口隔离原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">使用多个专门的接口来取代一个统一的接口。</div></pre></td></tr></table></figure>
-<p>现实世界中，我们期待万能的东西，例如物理里的万用表，小说电影里面的万能钥匙等等。但是在软件工程领域，我们应该尽量避免一类多能。接口隔离原则和单一职责原则类似，我们设计接口时尽量隔离业务功能。记得在支付宝实习时，我见到过能够查询并修改一个业务的接口。当需求变更我们需要更新查询的业务逻辑时，修改部分的业务也不可避免地被影响了。最显而易见的后果就是，虽然仅修改了查询，但回归测试不得不把修改也包含进来。</p>
-<h2 id="4-lsp里式替换原则"><a href="#4-lsp里式替换原则" class="headerlink" title="4. lsp里式替换原则"></a>4. lsp里式替换原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在软件系统中，一个可以接受基类对象的地方必然可以接受一个子类对象。</div></pre></td></tr></table></figure>
-<p>这一原则字面上有些晦涩，但其实也很好理解。主要需要注意的地方是，当我们的子类复写（override）父类的一个方法时，要注意复写函数的功能要和父类原函数的功能保持一致。比如原来的父类函数是toString，子类方法也要是类型功能，不能突变成查询数据库或是其他。也就是说在一个软件系统中，子类应该能够完全替换任何父类能够出现的地方，并且经过替换后，不会让调用父类的客户程序从行为上有任何改变。</p>
-<h2 id="5-dip依赖倒置原则"><a href="#5-dip依赖倒置原则" class="headerlink" title="5. dip依赖倒置原则"></a>5. dip依赖倒置原则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">要针对抽象层编程，而不要针对具体类编程。</div></pre></td></tr></table></figure>
-<p>这一原则在系统架构层面上非常重要，遵循这一原则的系统更易于维护，不容易受外部系统调用接口的变更而影响。在ocp开闭原则中我们提到，我们要避免接口的变更给外部调用系统带来的不利影响。但实际情况却是，猪队友不是少数，需要配合技改的接口经常出现在我们的需求列表中。</p>
-<p>假设我们在领域模型层的业务逻辑需要调用发送短信服务，所谓针对具体类编程就是指，因为我们已经知道接口的定义和如何使用，我们就任选地在我们的业务逻辑中直接使用短信接口调用短信服务。这样我们的业务代码中大量耦合了短信接口。但猪队友出现，短信接口出现了更改，悲剧随着而来，这时我们只能一个一个地修改这些使用了短信接口的业务逻辑代码点。这种方式地修改，出现错误的概率也非常高。</p>
-<p>最聪明的方法是，我们假定自己不知道短信接口的具体存在和如何调用。我们在我们的系统中自己定义一个短信调用服务的client，通过client提供短信调用的入口和出口，这样只有client出现在我们的业务代码中。一旦再次出现短信接口的更改，现在只有client调用了短信服务，我们只需要修改这一部分，绝大多数业务完全不受影响。随便提一下，这样做的另一一个好处是，我们这编写代码逻辑时，应该秉承这样的原则，所以别人写的东西都不可信任，我们把短信服务封装在client中，在client中进行错误处理。这样很好地保证了我们自己的业务代码不会被短信服务的异常中断。</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/07/19/OOAD5大原则理解/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kyler.wang/2016/07/19/OOAD5大原则理解/" data-id="cixa1atff00009qpe8jaatmpm" class="article-share-link">Share</a>
+      <a data-url="http://kyler.wang/2016/07/19/OOAD5大原则理解/" data-id="cixa1ipix0004f3pegpcbu10i" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -935,46 +293,18 @@ public enum Os {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
-        
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，于是借着这波东风赶鸭子上架，花了2h时间研究了下github快速搭建博客的方法。这里写下使用Hexo搭建Blog的主要流程作为我第一篇文章，需要的拿走不谢。</p>
 <p>另外本文参考了Google上search的一些同类型文章，首先我觉得大家写的都很赞，对这些前辈就不一一感谢了。但是多数文章Hexo和github结合的一些细节表达的还不是特别清楚，导致我读的时候也有些困惑，所以不才大胆对这些资料进行总结精炼，并且对Hexo部署到github page的细节更多说明。</p>
 <p>另外转载请尽量给个面子，标注个作者啥的。实在不愿意心里默默感谢下也算了。╮(╯▽╰)╭</p>
-<h2 id="为什么要使用Hexo-amp-Github搭建Blog？"><a href="#为什么要使用Hexo-amp-Github搭建Blog？" class="headerlink" title="为什么要使用Hexo&amp;Github搭建Blog？"></a>为什么要使用Hexo&amp;Github搭建Blog？</h2><p>这个问题有几个层面：</p>
-<ul>
-<li>第一为什么要搭建自己的Blog？我觉得对于Coder来说使用markdown、git这些语言或工具写文章可以提高效率，目前像博客园或CSDN应该还不能支持。</li>
-<li>第二为啥要用github pages？恩，对应土豪来说自己买服务器也是可以的。对于多数轻量级用户（文章写得少，访问量少）github pages不收费(300MB)方便部署很经济。</li>
-<li>第三为毛要用Hexo？恩（思考ing），同事推荐我马上就用了，另外其他人说相比Jekyll、Octopress来说Hexo更轻便更快捷。。。好吧，其他两个不太熟悉。</li>
-</ul>
-<h2 id="主要步骤"><a href="#主要步骤" class="headerlink" title="主要步骤"></a>主要步骤</h2><h3 id="github创建仓库"><a href="#github创建仓库" class="headerlink" title="github创建仓库"></a>github创建仓库</h3><p>不了解github和不知道如何创建仓库（repository）的请参考<a href="https://guides.github.com/activities/hello-world/" target="_blank" rel="external">https://guides.github.com/activities/hello-world/</a>。</p>
-<p><img src="http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/55032611.jpg" alt=""></p>
-<p>据传说repository name必须是github的username.github.io，我就是照着做的，大家可以试试不这样（期待脸）。</p>
-<p><img src="http://7xve7o.com1.z0.glb.clouddn.com/16-7-15/26390887.jpg" alt=""></p>
-<p>创建好仓库后再setting tag中点击Launch automatic page generator，如上图。这时你访问username.github.io就可以看到github pages自动生成的静态页面网站。是不是很有成就感？然而对于使用Hexo的同学来说这步并没有什么卵用。</p>
-<h3 id="安装Node-JS"><a href="#安装Node-JS" class="headerlink" title="安装Node.JS"></a>安装Node.JS</h3><p>这一步是按照Hexo的前期准备，其实前面貌似还有一步安装git，恩。。。。。。好吧，我们忽略没有安装git的同学。</p>
-<p>安转nodejs直接到<a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs官网</a>直接下载安装包点击安装。需要注意是国内建议更换taobao的npm源，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
-<p>仅仅一条命令就是这么简单，这么屌。</p>
-<p>然后你可能需要安转一些插件，比较重要的是git自动部署插件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-<p>我是参考网上的教程，也装了些其他的，下面列出来，需不需要大家自己研究咯。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-index --save</div><div class="line">$ npm install hexo-generator-archive --save</div><div class="line">$ npm install hexo-generator-category --save</div><div class="line">$ npm install hexo-generator-tag --save</div><div class="line">$ npm install hexo-server --save</div><div class="line">$ npm install hexo-deployer-heroku --save</div><div class="line">$ npm install hexo-deployer-rsync --save</div><div class="line">$ npm install hexo-deployer-openshift --save</div><div class="line">$ npm install hexo-renderer-marked@0.2 --save</div><div class="line">$ npm install hexo-renderer-stylus@0.2 --save</div><div class="line">$ npm install hexo-generator-feed@1 --save</div><div class="line">$ npm install hexo-generator-sitemap@1 --save</div></pre></td></tr></table></figure>
-<h3 id="Hexo初始化"><a href="#Hexo初始化" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ cd &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
-<p>所有相关文件会出现在你指定的folder中。</p>
-<h3 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h3><p>这步其实也没用，执行下面命令，可以到<code>localhost：4000</code>查看效果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><p>hexo写作其实主要就如下四个命令，每次创建或修改文章都需要至少执行<code>hexo g</code>和<code>hexo d</code>两条命令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n “文章名” # 创建文章</div><div class="line">hexo clean # 恩，其实并不太知道有没有用。。。</div><div class="line">hexo g # 生成public静态文件</div><div class="line">hexo d # 发布项目到github pages</div></pre></td></tr></table></figure>
-<h3 id="部署到github-pages"><a href="#部署到github-pages" class="headerlink" title="部署到github pages"></a>部署到github pages</h3><p>Hexo的发布其实是依赖git的，所以需要修改根目录下<code>_config.yml</code>文件的<code>Deployment</code>部分。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">	type: git</div><div class="line">	repo: git@github.com:kellerwang/kellerwang.github.io.git</div><div class="line">	branch: master</div></pre></td></tr></table></figure>
-<p>需要特别注意<code>type:</code>、<code>repo:</code>和<code>branch:</code>后面需要空格，否则配置不成功。</p>
-<p>配置完成后执行<code>hexo d</code>，然后稍等片刻去愉快地访问你的username.github.io吧。</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/07/15/使用Hexo构建Blog/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kyler.wang/2016/07/15/使用Hexo构建Blog/" data-id="cixa1atfr00039qpevpos9mgb" class="article-share-link">Share</a>
+      <a data-url="http://kyler.wang/2016/07/15/使用Hexo构建Blog/" data-id="cixa1ipiv0003f3pe4qjfe3sm" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -992,7 +322,7 @@ public enum Os {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/program/">技术</a></li></ul>
     </div>
@@ -1007,7 +337,7 @@ public enum Os {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
     </div>
@@ -1017,7 +347,7 @@ public enum Os {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
