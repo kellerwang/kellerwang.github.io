@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kyler.wang/"/>
-  <updated>2016-12-29T07:02:31.000Z</updated>
+  <updated>2016-12-29T07:06:11.000Z</updated>
   <id>http://kyler.wang/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kyler.wang/2016/12/28/sublime-markdown%E5%AE%9E%E8%B7%B5/"/>
     <id>http://kyler.wang/2016/12/28/sublime-markdown实践/</id>
     <published>2016-12-28T07:24:45.000Z</published>
-    <updated>2016-12-29T07:02:31.000Z</updated>
+    <updated>2016-12-29T07:06:11.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;from-Mou-to-sublime&quot;&gt;&lt;a href=&quot;#from-Mou-to-sublime&quot; class=&quot;headerlink&quot; title=&quot;from Mou to sublime&quot;&gt;&lt;/a&gt;from Mou to sublime&lt;/h2&gt;&lt;p&gt;markdown这种轻量级标记语言被多数科技公司作为主流文档编辑语言，使用起来也是灰常方便。笔者在mac上编写markdown语言原来主要使用&lt;a href=&quot;http://25.io/mou/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MOU&lt;/a&gt;，但是日前osX升级到10.12.2后mou突然抽风不能使用。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://7xve7o.com1.z0.glb.clouddn.com/16-12-28/54692701-file_1482910576451_14afa.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -74,7 +74,7 @@
     <link href="http://kyler.wang/2016/08/02/%E8%BD%AC%E8%BD%BD-Python-%E8%84%9A%E6%9C%AC%E5%B8%AE%E4%BD%A0%E6%89%BE%E5%87%BA%E5%BE%AE%E4%BF%A1%E4%B8%8A%E5%88%A0%E9%99%A4%E4%BD%A0%E5%A5%BD%E5%8F%8B%E7%9A%84%E4%BA%BA/"/>
     <id>http://kyler.wang/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/</id>
     <published>2016-08-02T08:09:19.000Z</published>
-    <updated>2016-08-02T08:36:47.000Z</updated>
+    <updated>2016-12-29T07:06:13.000Z</updated>
     
     <content type="html">&lt;p&gt;前两天朋友圈被一篇文章《黑科技，Python 脚本帮你找出微信上删除你好友的人》刷屏了。 这篇文章说道，以为Github上的大神Ox5e利用Python写了一个脚本自动帮你测试哪些好友把你删了，并且不会打扰到对方。 这个项目在Github上短短几天时间就获取到了3000多个Star。 这是什么概念？ 如果你在Github上获得了100个Star，去腾讯应聘的话可以免掉笔试。 Python最出名的Web框架django一共有17000多个Star。 很多朋友很奇怪这是这么实现的了？ 笔者在读完他的源码后，大概了解了背后的原理。 下面就跟着笔者一起来揭秘这个背后的原理吧！ 原理就是用微信网页版的接口，新建群组,如果加不进来就是被删好友了(不要在群组里讲话,别人是看不见的) 具体的技术上的实现原理如下： &lt;/p&gt;
 &lt;h2 id=&quot;获取uuid&quot;&gt;&lt;a href=&quot;#获取uuid&quot; class=&quot;headerlink&quot; title=&quot;获取uuid&quot;&gt;&lt;/a&gt;获取uuid&lt;/h2&gt;&lt;p&gt;打开&lt;a href=&quot;https://wx.qq.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Web版微信&lt;/a&gt;，使用chrome的审查元素，查看network请求，可以找到&lt;code&gt;jslogin&lt;/code&gt;请求，如下图，这个请求返回&lt;code&gt;QRLogin&lt;/code&gt;的uuid，正是生成二维码登陆的必要参数。 &lt;/p&gt;
@@ -122,7 +122,7 @@
     <link href="http://kyler.wang/2016/07/19/Java%E7%BC%96%E7%A8%8B%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     <id>http://kyler.wang/2016/07/19/Java编程最佳实践/</id>
     <published>2016-07-19T11:47:58.000Z</published>
-    <updated>2016-07-19T11:49:43.000Z</updated>
+    <updated>2016-12-29T07:06:12.000Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;转自喜马拉雅军校第一期班&lt;/p&gt;
@@ -728,7 +728,7 @@ public enum Os {
     <link href="http://kyler.wang/2016/07/19/OOAD5%E5%A4%A7%E5%8E%9F%E5%88%99%E7%90%86%E8%A7%A3/"/>
     <id>http://kyler.wang/2016/07/19/OOAD5大原则理解/</id>
     <published>2016-07-19T06:26:51.000Z</published>
-    <updated>2016-07-19T11:47:34.000Z</updated>
+    <updated>2016-12-29T07:06:11.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;OOAD的5大原则有什么用&quot;&gt;&lt;a href=&quot;#OOAD的5大原则有什么用&quot; class=&quot;headerlink&quot; title=&quot;OOAD的5大原则有什么用?&quot;&gt;&lt;/a&gt;OOAD的5大原则有什么用?&lt;/h2&gt;&lt;p&gt;在聊OOAD的5大原则具体是啥前，先简单介绍下OOAD这些原则有什么用。OOAD出现在上世纪80年代，起因是航天事业的发展第一次出现超10w代码行的软件项目。面对超10w代码行的项目，如果继续采取基于过程的设计形式，开发者很难互相理解并协助。这时出现的面向对象程序设计能够更好地切分项目模块，开发者也方便理解项目代码逻辑，接口更让让协作简化。而本文介绍的这5个原则是OOAD存在和实现的基础，践行这些标准可以最大程度地软件设计质量。这些原则都出自一个出发点，即&lt;code&gt;高内聚&amp;amp;低耦合&lt;/code&gt;。那下面我们就来具体介绍这所谓的OOAD5大原则。&lt;/p&gt;
 &lt;h2 id=&quot;1-ocp开闭原则&quot;&gt;&lt;a href=&quot;#1-ocp开闭原则&quot; class=&quot;headerlink&quot; title=&quot;1. ocp开闭原则&quot;&gt;&lt;/a&gt;1. ocp开闭原则&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;软件实体对扩展是开放的，但对修改是关闭的，即在不修改一个软件实体的基础上去扩展其功能。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -765,7 +765,7 @@ public enum Os {
     <link href="http://kyler.wang/2016/07/15/%E4%BD%BF%E7%94%A8Hexo%E6%9E%84%E5%BB%BABlog/"/>
     <id>http://kyler.wang/2016/07/15/使用Hexo构建Blog/</id>
     <published>2016-07-15T08:35:52.000Z</published>
-    <updated>2016-12-29T07:02:16.000Z</updated>
+    <updated>2016-12-29T07:06:16.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一直吵着要建个博客，积累点自己的东西，但无奈懒癌难医，计划脱了半年之久。巧的是上周公司training的homework就是搭建自己的博客，于是借着这波东风赶鸭子上架，花了2h时间研究了下github快速搭建博客的方法。这里写下使用Hexo搭建Blog的主要流程作为我第一篇文章，需要的拿走不谢。&lt;/p&gt;
 &lt;p&gt;另外本文参考了Google上search的一些同类型文章，首先我觉得大家写的都很赞，对这些前辈就不一一感谢了。但是多数文章Hexo和github结合的一些细节表达的还不是特别清楚，导致我读的时候也有些困惑，所以不才大胆对这些资料进行总结精炼，并且对Hexo部署到github page的细节更多说明。&lt;/p&gt;

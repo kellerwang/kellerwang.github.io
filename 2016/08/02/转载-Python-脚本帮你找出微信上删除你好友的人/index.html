@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvm0kjq7bj20qq078myc.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvm12q4e4j20r0070abo.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/785cd1e3gw1ezvm1hc503j20vi076gmu.jpg">
-<meta property="og:updated_time" content="2016-08-02T08:36:47.000Z">
+<meta property="og:updated_time" content="2016-12-29T07:06:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="转载-Python 脚本帮你找出微信上删除你好友的人">
 <meta name="twitter:description" content="前两天朋友圈被一篇文章《黑科技，Python 脚本帮你找出微信上删除你好友的人》刷屏了。 这篇文章说道，以为Github上的大神Ox5e利用Python写了一个脚本自动帮你测试哪些好友把你删了，并且不会打扰到对方。 这个项目在Github上短短几天时间就获取到了3000多个Star。 这是什么概念？ 如果你在Github上获得了100个Star，去腾讯应聘的话可以免掉笔试。 Python最出名的W">
@@ -116,6 +116,11 @@
       
         <!-- Table of Contents -->
         
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取uuid"><span class="toc-number">1.</span> <span class="toc-text">获取uuid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取登陆二维码"><span class="toc-number">2.</span> <span class="toc-text">获取登陆二维码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登陆"><span class="toc-number">3.</span> <span class="toc-text">登陆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化页面"><span class="toc-number">4.</span> <span class="toc-text">初始化页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取联系人"><span class="toc-number">5.</span> <span class="toc-text">获取联系人</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建群聊"><span class="toc-number">6.</span> <span class="toc-text">创建群聊</span></a></li></ol>
+          </div>
+        
         <p>前两天朋友圈被一篇文章《黑科技，Python 脚本帮你找出微信上删除你好友的人》刷屏了。 这篇文章说道，以为Github上的大神Ox5e利用Python写了一个脚本自动帮你测试哪些好友把你删了，并且不会打扰到对方。 这个项目在Github上短短几天时间就获取到了3000多个Star。 这是什么概念？ 如果你在Github上获得了100个Star，去腾讯应聘的话可以免掉笔试。 Python最出名的Web框架django一共有17000多个Star。 很多朋友很奇怪这是这么实现的了？ 笔者在读完他的源码后，大概了解了背后的原理。 下面就跟着笔者一起来揭秘这个背后的原理吧！ 原理就是用微信网页版的接口，新建群组,如果加不进来就是被删好友了(不要在群组里讲话,别人是看不见的) 具体的技术上的实现原理如下： </p>
 <h2 id="获取uuid"><a href="#获取uuid" class="headerlink" title="获取uuid"></a>获取uuid</h2><p>打开<a href="https://wx.qq.com/" target="_blank" rel="external">Web版微信</a>，使用chrome的审查元素，查看network请求，可以找到<code>jslogin</code>请求，如下图，这个请求返回<code>QRLogin</code>的uuid，正是生成二维码登陆的必要参数。 </p>
 <p><img src="http://ww3.sinaimg.cn/large/785cd1e3gw1ezvluv3ebuj20kr03vgmk.jpg" alt=""> <img src="http://ww2.sinaimg.cn/large/785cd1e3gw1ezvlw2forfj20n0049q3j.jpg" alt=""> </p>
@@ -148,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kyler.wang/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/" data-id="cixa0xx9g000442peqav7x5xn" class="article-share-link">Share</a>
+      <a data-url="http://kyler.wang/2016/08/02/转载-Python-脚本帮你找出微信上删除你好友的人/" data-id="cixa11ltm00055ppeb58f3eil" class="article-share-link">Share</a>
       
       
     </footer>
