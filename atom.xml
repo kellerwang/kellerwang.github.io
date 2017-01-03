@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kyler.wang/"/>
-  <updated>2016-12-29T07:19:33.000Z</updated>
+  <updated>2017-01-03T11:50:19.000Z</updated>
   <id>http://kyler.wang/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mockito粗讲 &amp; import static</title>
+    <link href="http://kyler.wang/2016/12/29/mockito%E7%B2%97%E8%AE%B2&import%20static/"/>
+    <id>http://kyler.wang/2016/12/29/mockito粗讲&import static/</id>
+    <published>2016-12-29T08:12:32.000Z</published>
+    <updated>2017-01-03T11:50:19.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;什么时候我们这么需要mock&quot;&gt;&lt;a href=&quot;#什么时候我们这么需要mock&quot; class=&quot;headerlink&quot; title=&quot;什么时候我们这么需要mock&quot;&gt;&lt;/a&gt;什么时候我们这么需要mock&lt;/h2&gt;&lt;p&gt;今天同事抱怨controller层测试用例搞起来麻烦，我本以为是需要模拟HTTP请求（请求头和参数），于是推荐了mockmvc，一个spring 4.X默认支持的测试框架。使用起来很方便，例如我们模拟访问/balance。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;MockMvc mockMvc = standaloneSetup(balanceController).build();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;mockMvc.perform(get(&amp;quot;/balance&amp;quot;)).andExpect(MockMvcResultMatchers.content().string(&amp;quot;1&amp;quot;));&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;但是mockmvc并没有帮他解决问题，我问他原因。他解释说是因为他困扰的不是模拟HTTP请求，而是他controller层代码耦合了大量的业务逻辑，里面包括对一些其他系统接口的调用，而不得不吐槽的是我司的测试环境很不稳定，调用其他系统很可能失败，影响了他对正常业务逻辑的测试。&lt;/p&gt;
+&lt;p&gt;首先，我比较提倡的是系统输出接口层，不要耦合业务逻辑。简单讲就是尽量controller或者rpc imp类主题是一个大的异常处理框架包含几个自己封装的service类。当然一些老代码不好改，或者有些人不喜欢这样，这时测试就会遇到麻烦，如何解决呢？就需要mock，将第三方系统(甚至自己系统)的方法全部mock掉，让业务逻辑顺利走下去。&lt;/p&gt;
+&lt;h2 id=&quot;mockito&quot;&gt;&lt;a href=&quot;#mockito&quot; class=&quot;headerlink&quot; title=&quot;mockito&quot;&gt;&lt;/a&gt;mockito&lt;/h2&gt;&lt;p&gt;mockito是一个轻量级的mocking框架，具体可以&lt;a href=&quot;https://code.google.com/archive/p/mockito/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考&lt;/a&gt;，这里就简单讲下如何使用。&lt;/p&gt;
+&lt;p&gt;一般来说我们会先mock一个需要mock的类。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;BalanceQueryServiceClient balanceQueryServiceClient = mock(BalanceQueryServiceClient.class);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中balanceQueryServiceClient.getEmayBalance())是我们系统需要调用的方法，这个方法会返回一个BalanceResult类。于是我们自己构造一个BalanceResult对象，并设定在调用mock的其中balanceQueryServiceClient时返回该对象。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;BalanceResult balanceResult = new BalanceResult();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;balanceResult.setSuccess(true);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;when(balanceQueryServiceClient.getEmayBalance()).thenReturn(balanceResult);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后我们需要把我们mock的balanceQueryServiceClient放回我们系统的BalanceControllerl类，这里用到反射。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;BalanceController balanceController = new BalanceController();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Field field = balanceController.getClass().getDeclaredField(&amp;quot;balanceQueryService&amp;quot;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;field.setAccessible(true);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;field.set(balanceController, balanceQueryServiceClient);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;import-static&quot;&gt;&lt;a href=&quot;#import-static&quot; class=&quot;headerlink&quot; title=&quot;import static&quot;&gt;&lt;/a&gt;import static&lt;/h2&gt;&lt;p&gt;比较有意思的一点是写代码时注意到我没有新增任何mockito的maven repository，可能是我因为用的ide是intelliJ IDEA有自动集成。需要的同学可以加入：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;!-- https://mvnrepository.com/artifact/org.mockito/mockito-all --&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;groupId&amp;gt;org.mockito&amp;lt;/groupId&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;artifactId&amp;gt;mockito-all&amp;lt;/artifactId&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;version&amp;gt;1.9.5&amp;lt;/version&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;另外上节中使用的mock和when方法实际来自Mockito.mock和Mockito.when，我们能直接在代码中像类内静态方法般使用mock和when源自import static。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;import static org.mockito.Mockito.mock;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import static org.mockito.Mockito.when;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;该特性通常称为“静态导入”,语法必是import static后面跟你想导入的static成员的完全限定名称，或者通配符。引入static import最主要考虑到两个需要，第一个就是对一些工具性的，常用的静态方法进行直接引用。&lt;/p&gt;
+&lt;p&gt;但是需要注意的是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;提防含糊不清的命名static成员。例如，如果你对Integer类和Long类执行了静态导入，引用MAX_VALUE将导致一个编译器错误，因为Integer和Long都有一个MAX_VALUE常量，并且Java不会知道你在引用哪个。&lt;/li&gt;
+&lt;li&gt;package与类别等可以用于管理一些资源，避免同名冲突发生，而”import”与”import staic”则是反其道而行，让您可以获得一些方便，如果同名冲突发生了，这种方便性的使用就有考虑的必要了。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么时候我们这么需要mock&quot;&gt;&lt;a href=&quot;#什么时候我们这么需要mock&quot; class=&quot;headerlink&quot; title=&quot;什么时候我们这么需要mock&quot;&gt;&lt;/a&gt;什么时候我们这么需要mock&lt;/h2&gt;&lt;p&gt;今天同事抱怨controller层测试用例搞起来麻烦，我本以为是需要模拟HTTP请求（请求头和参数），于是推荐了mockmvc，一个spring 4.X默认支持的测试框架。使用起来很方便，例如我们模拟访问/balance。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;MockMvc mockMvc = standaloneSetup(balanceController).build();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;mockMvc.perform(get(&amp;quot;/balance&amp;quot;)).andExpect(MockMvcResultMatchers.content().string(&amp;quot;1&amp;quot;));&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>sublime+markdown实践</title>
