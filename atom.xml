@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kyler.wang/"/>
-  <updated>2017-01-05T09:00:48.000Z</updated>
+  <updated>2017-01-04T03:12:01.000Z</updated>
   <id>http://kyler.wang/</id>
   
   <author>
@@ -14,57 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>定时任务清理服务器日志文件</title>
-    <link href="http://kyler.wang/2017/01/05/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/"/>
-    <id>http://kyler.wang/2017/01/05/定时任务清理服务器日志文件/</id>
-    <published>2017-01-05T08:05:01.000Z</published>
-    <updated>2017-01-05T09:00:48.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;公司测试机经常因为日志写满磁盘而挂掉，每次需要人工干预删除时间比较久的废日志。本文给出完美解决方法，介绍一种使用crontab定时任务+shell脚本定时清理服务器文件的方法。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;删除文件脚本&quot;&gt;&lt;a href=&quot;#删除文件脚本&quot; class=&quot;headerlink&quot; title=&quot;删除文件脚本&quot;&gt;&lt;/a&gt;删除文件脚本&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;filePath=/logs/redeem-code&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;time_expiry=30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;find &lt;span class=&quot;variable&quot;&gt;$filePath&lt;/span&gt; -mtime +&lt;span class=&quot;variable&quot;&gt;$time_expiry&lt;/span&gt; -name &lt;span class=&quot;string&quot;&gt;&quot;*.log*&quot;&lt;/span&gt; -exec rm -rf &amp;#123;&amp;#125; \;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;使用find命令，查找指定条件文件；&lt;/li&gt;
-&lt;li&gt;$filePath变量记录指定文件地址；&lt;/li&gt;
-&lt;li&gt;$time_expiry变量记录天数，-mtime +$time_expiry查找$time_expiry天前的文件；&lt;/li&gt;
-&lt;li&gt;“&lt;em&gt;.log&lt;/em&gt;“设定文件全民包含的正则；&lt;/li&gt;
-&lt;li&gt;-exec rm -rf {} \;执行删除文件；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;crontab定时任务&quot;&gt;&lt;a href=&quot;#crontab定时任务&quot; class=&quot;headerlink&quot; title=&quot;crontab定时任务&quot;&gt;&lt;/a&gt;crontab定时任务&lt;/h2&gt;&lt;p&gt;通过crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。&lt;/p&gt;
-&lt;h3 id=&quot;命令格式&quot;&gt;&lt;a href=&quot;#命令格式&quot; class=&quot;headerlink&quot; title=&quot;命令格式&quot;&gt;&lt;/a&gt;命令格式&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;crontab [-u user] file crontab [-u user] [ -e | -l | -r ]&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;命令参数&quot;&gt;&lt;a href=&quot;#命令参数&quot; class=&quot;headerlink&quot; title=&quot;命令参数&quot;&gt;&lt;/a&gt;命令参数&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;-u user：用来设定某个用户的crontab服务；&lt;/li&gt;
-&lt;li&gt;file：file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab；&lt;/li&gt;
-&lt;li&gt;-e：编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件；&lt;/li&gt;
-&lt;li&gt;-l：显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容；&lt;/li&gt;
-&lt;li&gt;-r：从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件；&lt;/li&gt;
-&lt;li&gt;-i：在删除用户的crontab文件时给确认提示；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;crontab的文件格式&quot;&gt;&lt;a href=&quot;#crontab的文件格式&quot; class=&quot;headerlink&quot; title=&quot;crontab的文件格式&quot;&gt;&lt;/a&gt;crontab的文件格式&lt;/h3&gt;&lt;p&gt;分 时 日 月 星期 要运行的命令&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;第1列分钟0～59&lt;/li&gt;
-&lt;li&gt;第2列小时0～23（0表示子夜）&lt;/li&gt;
-&lt;li&gt;第3列日1～31&lt;/li&gt;
-&lt;li&gt;第4列月1～12&lt;/li&gt;
-&lt;li&gt;第5列星期0～7（0和7表示星期天）&lt;/li&gt;
-&lt;li&gt;第6列要运行的命令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;举个例子&quot;&gt;&lt;a href=&quot;#举个例子&quot; class=&quot;headerlink&quot; title=&quot;举个例子&quot;&gt;&lt;/a&gt;举个例子&lt;/h3&gt;&lt;p&gt;首先编辑crontab文件：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#crontab -e&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;在文件中写入:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;10 0 * * * /opt/soft/log/auto-del-7-days-ago-log.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这里的设置是每天凌晨0点10分执行auto-del-7-days-ago-log.sh文件进行数据清理任务了。&lt;/p&gt;
-&lt;h2 id=&quot;传输到服务器&quot;&gt;&lt;a href=&quot;#传输到服务器&quot; class=&quot;headerlink&quot; title=&quot;传输到服务器&quot;&gt;&lt;/a&gt;传输到服务器&lt;/h2&gt;&lt;p&gt;使用scp命令传输脚本文件到服务器：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;scp local_file remote_username@remote_ip:remote_folder&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;公司测试机经常因为日志写满磁盘而挂掉，每次需要人工干预删除时间比较久的废日志。本文给出完美解决方法，介绍一种使用crontab定时任务+shell脚本定时清理服务器文件的方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>mockito粗讲&amp;import static</title>
